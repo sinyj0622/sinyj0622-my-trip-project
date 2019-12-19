@@ -8,49 +8,56 @@ public class App2 {
     Scanner keyboard = new Scanner(System.in);
 
     final int SIZE = 100;
-    int [] no = new int[SIZE];
-    String[] name = new String[SIZE];
-    String[] nickname = new String[SIZE];
-    String[] email = new String[SIZE];
-    String[] passWord = new String[SIZE];
-    String[] myphoto = new String[SIZE];
-    String[] phonenumber = new String[SIZE];
-    Date[] date = new Date[SIZE];
-    String response;
+    
+    class Member {
+      int no;
+      String name;
+      String nickname;
+      String email;
+      String passWord;
+      String myphoto;
+      String phonenumber;
+      Date registeredDate;      
+    }
 
-
+    Member[] members = new Member[SIZE];
 
     int count = 0;
     for (int i = 0; i < SIZE; i++){
+      
       count++;
+      
+      Member member = new Member();
       System.out.print("번호: ");
-      no[i] = keyboard.nextInt();
+      member.no = keyboard.nextInt();
       keyboard.nextLine();
 
       System.out.print("이름: ");
-      name[i] = keyboard.nextLine();
+      member.name = keyboard.nextLine();
 
       System.out.print("별명: ");
-      nickname[i] = keyboard.nextLine();
+      member.nickname = keyboard.nextLine();
       
       System.out.print("암호: ");
-      passWord[i] = keyboard.nextLine();
+      member.passWord = keyboard.nextLine();
 
       System.out.print("이메일: ");
-      email[i] = keyboard.nextLine();
+      member.email = keyboard.nextLine();
 
       System.out.print("사진: ");
-      myphoto[i] = keyboard.nextLine();
+      member.myphoto = keyboard.nextLine();
 
       System.out.print("전화: ");
-      phonenumber[i] = keyboard.nextLine();
+      member.phonenumber = keyboard.nextLine();
 
-      date[i] = new Date(System.currentTimeMillis());
+      member.registeredDate = new Date(System.currentTimeMillis());
 
+      members[i] = member;
+      
       System.out.println();
 
       System.out.print("계속 입력하시겠습니까?(Y/n) ");
-      response = keyboard.nextLine();
+      String response = keyboard.nextLine();
       if (!response.equalsIgnoreCase("y")) {
         break;
       }
@@ -64,8 +71,11 @@ public class App2 {
 
 
     for (int i = 0; i < count; i++){
+      
+      Member member = members[i];
+      
       System.out.printf("%d, %s, %s, %s, %s\n", 
-          no[i], name[i], email[i], phonenumber[i], date[i]);
+          member.no, member.name, member.email, member.phonenumber, member.registeredDate);
 
 
     }

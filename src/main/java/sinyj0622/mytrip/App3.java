@@ -7,27 +7,39 @@ import java.util.Scanner;
 public class App3 {
   public static void main(String[] args) {
     Scanner keyboard = new Scanner(System.in);
-
+    
     final int SIZE = 100;
-    int[] no = new int[SIZE];
-    String[] text = new String[SIZE];
-    Date[] date = new Date[SIZE];
-    int[] viewCount = new int[SIZE];
+    
+    class Board {
+      int no;
+      String text;
+      Date date;
+      int viewCount;
+    }
+    
+    Board[] boards = new Board[SIZE];
+    
 
     int count = 0;
     for (int i = 0; i < SIZE; i++ ) {
+      
+      count++;     
+      
+      Board board = new Board();
+      
       System.out.print("번호: ");
-      no[i] = keyboard.nextInt();
+      board.no = keyboard.nextInt();
       keyboard.nextLine();
 
       System.out.print("내용: ");
-      text[i] = keyboard.nextLine();
+      board.text = keyboard.nextLine();
 
 
-      date[i] = new Date(System.currentTimeMillis());
-      viewCount[i] = 0;
+      board.date = new Date(System.currentTimeMillis());
+      board.viewCount = 0;
 
-      count++;
+
+      boards[i] = board;
       
       System.out.println();
 
@@ -44,8 +56,11 @@ public class App3 {
     System.out.println("-------------------------------"); 
 
     for ( int i = 0; i < count; i++) {
+      
+      Board board = boards[i];
+      
       System.out.printf("%d, %s, %s, %d\n", 
-          no[i], text[i], date[i], viewCount[i]);
+          board.no, board.text, board.date, board.viewCount);
 
 
     }

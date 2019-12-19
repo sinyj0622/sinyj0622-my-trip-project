@@ -8,41 +8,51 @@ public class App{
     Scanner keyboard = new Scanner(System.in);
 
     final int SIZE = 100;
-    int [] no = new int[SIZE];
-    String[] travelDestnation = new String[SIZE];
-    String[] travelTitle = new String[SIZE];
-    int[] person = new int[SIZE];
-    Date[] startDate = new Date[SIZE];
-    Date[] endDate = new Date[SIZE];
-    int[] travelMoney = new int[SIZE];
-
-
+    
+    class TravelPlan {
+      int no;
+      String Destnation;
+      String travelTitle;
+      int person;
+      Date startDate;
+      Date endDate;
+      int travelMoney;
+    }
+    
+    TravelPlan[] travelPlans = new TravelPlan[SIZE];
+    
     int count = 0;
     for (int i = 0; i < SIZE; i++) {
+      
+      TravelPlan travelPlan = new TravelPlan();
+      
       count++;
+      
       System.out.print("번호: ");
-      no[i] = keyboard.nextInt();
+      travelPlan.no = keyboard.nextInt();
       keyboard.nextLine();
 
       System.out.print("여행 제목? ");
-      travelTitle[i] = keyboard.nextLine();
+      travelPlan.travelTitle = keyboard.nextLine();
 
       System.out.print("어디로 떠나세요?: ");
-      travelDestnation[i] = keyboard.nextLine();
+      travelPlan.Destnation = keyboard.nextLine();
 
       System.out.print("여행 인원? ");
-      person[i] = keyboard.nextInt();
+      travelPlan.person = keyboard.nextInt();
       keyboard.nextLine();
 
       System.out.print("여행 시작일? ");
-      startDate[i] = Date.valueOf(keyboard.nextLine());
+      travelPlan.startDate = Date.valueOf(keyboard.nextLine());
 
       System.out.print("여행 종료일? ");
-      endDate[i] = Date.valueOf(keyboard.nextLine());
+      travelPlan.endDate = Date.valueOf(keyboard.nextLine());
 
       System.out.print("예상 경비? ");
-      travelMoney[i] = keyboard.nextInt();
+      travelPlan.travelMoney = keyboard.nextInt();
 
+      travelPlans[i] = travelPlan;
+      
       keyboard.nextLine();
       System.out.println();
 
@@ -60,8 +70,12 @@ public class App{
  
 
     for (int i = 0; i < count; i++) {
+      
+      TravelPlan travelPlan = travelPlans[i];
+      
       System.out.printf("%d, %s, %s, %s ~ %s\n", 
-          no[i], travelTitle[i], travelDestnation[i], startDate[i], endDate[i]);
+          travelPlan.no, travelPlan.travelTitle, travelPlan.Destnation, 
+          travelPlan.startDate, travelPlan.endDate);
 
     }
 
