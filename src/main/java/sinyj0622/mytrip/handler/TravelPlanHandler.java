@@ -1,25 +1,18 @@
-package sinyj0622.mytrip;
+package sinyj0622.mytrip.handler;
 
 import java.sql.Date;
 import java.util.Scanner;
+import sinyj0622.mytrip.domain.TravelPlan;
 
 public class TravelPlanHandler {
-  static class TravelPlan {
-    int no;
-    String Destnation;
-    String travelTitle;
-    int person;
-    Date startDate;
-    Date endDate;
-    int travelMoney;
-  }
+
 
   static final int TRAVELPLANS_SIZE = 100;
   static TravelPlan[] travelPlans = new TravelPlan[TRAVELPLANS_SIZE];
   static int travelplansCount = 0;
-  static Scanner keyboard;
+  public static Scanner keyboard;
   
-  static void addTravelPlan() {
+  public static void addTravelPlan() {
     TravelPlan travelPlan = new TravelPlan();
 
     System.out.print("번호: ");
@@ -52,12 +45,13 @@ public class TravelPlanHandler {
     
   }
 
-  static void listTravelPlan() {
+  public static void listTravelPlan() {
     for (int i = 0; i < travelplansCount; i++) {
       TravelPlan t = travelPlans[i];
       System.out.printf("%d, %s, %s, %s ~ %s\n", 
           t.no, t.travelTitle, t.Destnation, 
           t.startDate, t.endDate);
     }
+    System.out.println();
   }
 }

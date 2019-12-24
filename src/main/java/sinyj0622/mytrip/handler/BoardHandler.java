@@ -1,22 +1,18 @@
-package sinyj0622.mytrip;
+package sinyj0622.mytrip.handler;
 
 import java.sql.Date;
 import java.util.Scanner;
+import sinyj0622.mytrip.domain.Board;
 
 public class BoardHandler {
-  static class Board {
-    int no;
-    String text;
-    Date date;
-    int viewCount;
-  }
+
 
   static final int BOARD_SIZE = 100;
   static Board[] boards = new Board[BOARD_SIZE];
   static int boardCount = 0;
-  static Scanner keyboard;
+  public static Scanner keyboard;
   
-  static void addBoard() {
+  public static void addBoard() {
     Board board = new Board();
 
     System.out.print("번호: ");
@@ -37,12 +33,13 @@ public class BoardHandler {
     
   }
 
-  static void listBoard() {
+  public static void listBoard() {
     for (int i = 0; i < boardCount; i++) {
       Board b = boards[i];
       System.out.printf("%d, %s, %s, %d\n", 
           b.no, b.text, b.date, b.viewCount);
     }
+    System.out.println();
   }
   
 }

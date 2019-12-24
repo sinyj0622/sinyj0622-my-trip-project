@@ -1,26 +1,17 @@
-package sinyj0622.mytrip;
+package sinyj0622.mytrip.handler;
 
 import java.sql.Date;
 import java.util.Scanner;
+import sinyj0622.mytrip.domain.Member;
 
 public class MemberHandler {
-  static class Member {
-    int no;
-    String name;
-    String nickname;
-    String email;
-    String passWord;
-    String myphoto;
-    String phonenumber;
-    Date registeredDate;      
-  }
 
   static final int MEMBER_SIZE = 100;
   static Member[] members = new Member[MEMBER_SIZE];
   static int memberCount = 0;
-  static Scanner keyboard;
+  public static Scanner keyboard;
 
-  static void addMember() {
+  public static void addMember() {
     Member member = new Member();
     System.out.print("번호: ");
     member.no = keyboard.nextInt();
@@ -52,12 +43,13 @@ public class MemberHandler {
     
   }
 
-  static void listMember() {
+  public static void listMember() {
     for (int i = 0; i < memberCount; i++){
       Member m = members[i];
       System.out.printf("%d, %s, %s, %s, %s\n", 
           m.no, m.name, m.email, m.phonenumber, m.registeredDate);
     }
+    System.out.println();
   }
   
 }

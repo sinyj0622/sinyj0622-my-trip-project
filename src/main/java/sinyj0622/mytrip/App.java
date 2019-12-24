@@ -1,6 +1,9 @@
 package sinyj0622.mytrip;
 
 import java.util.Scanner;
+import sinyj0622.mytrip.handler.BoardHandler;
+import sinyj0622.mytrip.handler.MemberHandler;
+import sinyj0622.mytrip.handler.TravelPlanHandler;
 
 public class App{
 
