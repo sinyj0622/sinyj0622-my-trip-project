@@ -40,7 +40,7 @@ public class TravelPlanHandler {
     keyboard.nextLine();
 
     travelPlans[travelplansCount++] = travelPlan;
-    System.out.println("저장하였습니다.");
+    System.out.println("여행 계획을 저장하였습니다.");
     System.out.println();
     
   }

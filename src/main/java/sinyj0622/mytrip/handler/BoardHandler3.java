@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.Scanner;
 import sinyj0622.mytrip.domain.Board;
 
-public class BoardHandler {
+public class BoardHandler3 {
 
 
   static final int BOARD_SIZE = 100;

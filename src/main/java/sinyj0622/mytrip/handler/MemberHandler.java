@@ -38,7 +38,7 @@ public class MemberHandler {
     member.registeredDate = new Date(System.currentTimeMillis());
 
     members[memberCount++] = member;
-    System.out.println("저장하였습니다.");
+    System.out.println("회원 정보를 저장하였습니다.");
     System.out.println();
     
   }
