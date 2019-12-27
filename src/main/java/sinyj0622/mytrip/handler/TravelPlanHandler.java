@@ -7,12 +7,13 @@ import sinyj0622.mytrip.domain.TravelPlan;
 public class TravelPlanHandler {
 
 
+  TravelPlan[] travelPlans = new TravelPlan[TRAVELPLANS_SIZE];
+  int travelplansCount = 0;
+  
   static final int TRAVELPLANS_SIZE = 100;
-  static TravelPlan[] travelPlans = new TravelPlan[TRAVELPLANS_SIZE];
-  static int travelplansCount = 0;
   public static Scanner keyboard;
   
-  public static void addTravelPlan() {
+  public void addTravelPlan() {
     TravelPlan travelPlan = new TravelPlan();
 
     System.out.print("번호: ");
@@ -39,15 +40,15 @@ public class TravelPlanHandler {
     travelPlan.travelMoney = keyboard.nextInt();
     keyboard.nextLine();
 
-    travelPlans[travelplansCount++] = travelPlan;
+    this.travelPlans[this.travelplansCount++] = travelPlan;
     System.out.println("여행 계획을 저장하였습니다.");
     System.out.println();
     
   }
 
-  public static void listTravelPlan() {
-    for (int i = 0; i < travelplansCount; i++) {
-      TravelPlan t = travelPlans[i];
+  public void listTravelPlan() {
+    for (int i = 0; i < this.travelplansCount; i++) {
+      TravelPlan t = this.travelPlans[i];
       System.out.printf("%d, %s, %s, %s ~ %s\n", 
           t.no, t.travelTitle, t.Destnation, 
           t.startDate, t.endDate);

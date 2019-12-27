@@ -7,12 +7,13 @@ import sinyj0622.mytrip.domain.Board;
 public class BoardHandler {
 
 
+  Board[] boards = new Board[BOARD_SIZE];
+  int boardCount = 0;
+  
   static final int BOARD_SIZE = 100;
-  static Board[] boards = new Board[BOARD_SIZE];
-  static int boardCount = 0;
   public static Scanner keyboard;
 
-  public static void addBoard() {
+  public void addBoard() {
     Board board = new Board();
 
     System.out.print("번호: ");
@@ -27,15 +28,15 @@ public class BoardHandler {
     board.viewCount = 0;
 
 
-    boards[boardCount++] = board;
+    this.boards[this.boardCount++] = board;
     System.out.println("내용을 저장하였습니다.");
     System.out.println();
 
   }
 
-  public static void listBoard() {
-    for (int i = 0; i < boardCount; i++) {
-      Board b = boards[i];
+  public void listBoard() {
+    for (int i = 0; i < this.boardCount; i++) {
+      Board b = this.boards[i];
       System.out.printf("%d, %s, %s, %d\n", 
           b.no, b.text, b.date, b.viewCount);
     }
@@ -43,15 +44,15 @@ public class BoardHandler {
   }
 
 
-  public static void detailBoard() {
+  public void detailBoard() {
     System.out.print("게시글 번호? ");
     int no = keyboard.nextInt();
     keyboard.nextLine();
 
     Board board = null;
-    for (int i = 0; i < boardCount; i++) {
-      if (boards[i].no == no) {
-        board = boards[i];
+    for (int i = 0; i < this.boardCount; i++) {
+      if (this.boards[i].no == no) {
+        board = this.boards[i];
         break;
       }
     }

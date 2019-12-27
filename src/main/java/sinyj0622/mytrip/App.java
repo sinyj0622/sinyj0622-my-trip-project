@@ -2,10 +2,6 @@ package sinyj0622.mytrip;
 
 import java.util.Scanner;
 import sinyj0622.mytrip.handler.BoardHandler;
-import sinyj0622.mytrip.handler.BoardHandler2;
-import sinyj0622.mytrip.handler.BoardHandler3;
-import sinyj0622.mytrip.handler.BoardHandler4;
-import sinyj0622.mytrip.handler.BoardHandler5;
 import sinyj0622.mytrip.handler.MemberHandler;
 import sinyj0622.mytrip.handler.TravelPlanHandler;
 
@@ -18,10 +14,14 @@ public class App{
     TravelPlanHandler.keyboard = keyboard;
     MemberHandler.keyboard = keyboard;
     BoardHandler.keyboard = keyboard;
-    BoardHandler2.keyboard = keyboard;
-    BoardHandler3.keyboard = keyboard;
-    BoardHandler4.keyboard = keyboard;
-    BoardHandler5.keyboard = keyboard;
+    
+    BoardHandler edit1 = new BoardHandler();
+    BoardHandler edit2 = new BoardHandler();
+    BoardHandler edit3 = new BoardHandler();
+    BoardHandler edit4 = new BoardHandler();
+    BoardHandler edit5 = new BoardHandler();
+    MemberHandler memberEdit1 = new MemberHandler();
+    TravelPlanHandler planEdit1 = new TravelPlanHandler();
     
 
     String command;
@@ -30,62 +30,62 @@ public class App{
       command = keyboard.nextLine();
 
       switch (command) {
-        case "/lesson/add":
-          TravelPlanHandler.addTravelPlan();
+        case "/TravelPlan/add":
+          planEdit1.addTravelPlan();
           break;
-        case "/lesson/list":
-          TravelPlanHandler.listTravelPlan();
+        case "/TravelPlan/list":
+          planEdit1.listTravelPlan();
           break;
         case "/member/add":  
-          MemberHandler.addMember();
+          memberEdit1.addMember();
           break;
         case "/member/list":  
-          MemberHandler.listMember();
+          memberEdit1.listMember();
           break;      
         case "/board/add":
-          BoardHandler.addBoard();
+          edit1.addBoard();
           break;          
         case "/board/list":
-          BoardHandler.listBoard();
+          edit1.listBoard();
           break;
         case "/board/detail":
-          BoardHandler.detailBoard();
+          edit1.detailBoard();
           break;
         case "/board2/add":
-          BoardHandler2.addBoard();
+          edit2.addBoard();
           break;          
         case "/board2/list":
-          BoardHandler2.listBoard();
+          edit2.listBoard();
           break;
         case "/board2/detail":
-          BoardHandler2.detailBoard();
+          edit2.detailBoard();
           break;
         case "/board3/add":
-          BoardHandler3.addBoard();
+          edit3.addBoard();
           break;          
         case "/board3/list":
-          BoardHandler3.listBoard();
+          edit3.listBoard();
           break;
         case "/board3/detail":
-          BoardHandler3.detailBoard();
+          edit3.detailBoard();
           break;
         case "/board4/add":
-          BoardHandler4.addBoard();
+          edit4.addBoard();
           break;          
         case "/board4/list":
-          BoardHandler4.listBoard();
+          edit4.listBoard();
           break;
         case "/board4/detail":
-          BoardHandler4.detailBoard();
+          edit4.detailBoard();
           break;
         case "/board5/add":
-          BoardHandler5.addBoard();
+          edit5.addBoard();
           break;          
         case "/board5/list":
-          BoardHandler5.listBoard();
+          edit5.listBoard();
           break;
         case "/board5/detail":
-          BoardHandler5.detailBoard();
+          edit5.detailBoard();
           break;
         default:
           if (!command.equalsIgnoreCase("quit")) {

@@ -6,12 +6,13 @@ import sinyj0622.mytrip.domain.Member;
 
 public class MemberHandler {
 
+  Member[] members = new Member[MEMBER_SIZE];
+  int memberCount = 0;
+  
   static final int MEMBER_SIZE = 100;
-  static Member[] members = new Member[MEMBER_SIZE];
-  static int memberCount = 0;
   public static Scanner keyboard;
 
-  public static void addMember() {
+  public void addMember() {
     Member member = new Member();
     System.out.print("번호: ");
     member.no = keyboard.nextInt();
@@ -37,15 +38,15 @@ public class MemberHandler {
 
     member.registeredDate = new Date(System.currentTimeMillis());
 
-    members[memberCount++] = member;
+    this.members[this.memberCount++] = member;
     System.out.println("회원 정보를 저장하였습니다.");
     System.out.println();
     
   }
 
-  public static void listMember() {
-    for (int i = 0; i < memberCount; i++){
-      Member m = members[i];
+  public void listMember() {
+    for (int i = 0; i < this.memberCount; i++){
+      Member m = this.members[i];
       System.out.printf("%d, %s, %s, %s, %s\n", 
           m.no, m.name, m.email, m.phonenumber, m.registeredDate);
     }
