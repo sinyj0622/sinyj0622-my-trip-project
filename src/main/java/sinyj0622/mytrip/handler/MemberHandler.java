@@ -32,28 +32,28 @@ public class MemberHandler {
   public void addMember() {
     Member member = new Member();
     System.out.print("번호: ");
-    member.no = input.nextInt();
+    member.setNo(input.nextInt());
     input.nextLine();
 
     System.out.print("이름: ");
-    member.name = input.nextLine();
+    member.setName(input.nextLine());
 
     System.out.print("별명: ");
-    member.nickname = input.nextLine();
+    member.setNickname(input.nextLine());
 
     System.out.print("암호: ");
-    member.passWord = input.nextLine();
+    member.setPassWord(input.nextLine());
 
     System.out.print("이메일: ");
-    member.email = input.nextLine();
+    member.setEmail(input.nextLine());
 
     System.out.print("사진: ");
-    member.myphoto = input.nextLine();
+    member.setMyphoto(input.nextLine());
 
     System.out.print("전화: ");
-    member.phonenumber = input.nextLine();
+    member.setPhonenumber(input.nextLine());
 
-    member.registeredDate = new Date(System.currentTimeMillis());
+    member.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     this.members[this.memberCount++] = member;
     System.out.println("회원 정보를 저장하였습니다.");
@@ -65,7 +65,7 @@ public class MemberHandler {
     for (int i = 0; i < this.memberCount; i++){
       Member m = this.members[i];
       System.out.printf("%d, %s, %s, %s, %s\n", 
-          m.no, m.name, m.email, m.phonenumber, m.registeredDate);
+          m.getNo(), m.getName(), m.getEmail(), m.getPhonenumber(), m.getRegisteredDate());
     }
     System.out.println();
   }

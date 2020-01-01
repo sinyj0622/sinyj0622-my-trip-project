@@ -31,27 +31,27 @@ public class TravelPlanHandler {
     TravelPlan travelPlan = new TravelPlan();
 
     System.out.print("번호: ");
-    travelPlan.no = input.nextInt();
+    travelPlan.setNo(input.nextInt());
     input.nextLine();
 
     System.out.print("여행 제목? ");
-    travelPlan.travelTitle = input.nextLine();
+    travelPlan.setTravelTitle(input.nextLine());
 
     System.out.print("어디로 떠나세요?: ");
-    travelPlan.Destnation = input.nextLine();
+    travelPlan.setDestnation(input.nextLine());
 
     System.out.print("여행 인원? ");
-    travelPlan.person = input.nextInt();
+    travelPlan.setPerson(input.nextInt());
     input.nextLine();
 
     System.out.print("여행 시작일? ");
-    travelPlan.startDate = Date.valueOf(input.nextLine());
+    travelPlan.setStartDate(Date.valueOf(input.nextLine()));
 
     System.out.print("여행 종료일? ");
-    travelPlan.endDate = Date.valueOf(input.nextLine());
+    travelPlan.setEndDate(Date.valueOf(input.nextLine()));
 
     System.out.print("예상 경비? ");
-    travelPlan.travelMoney = input.nextInt();
+    travelPlan.setTravelMoney(input.nextInt());
     input.nextLine();
 
     this.travelPlans[this.travelplansCount++] = travelPlan;
@@ -64,8 +64,8 @@ public class TravelPlanHandler {
     for (int i = 0; i < this.travelplansCount; i++) {
       TravelPlan t = this.travelPlans[i];
       System.out.printf("%d, %s, %s, %s ~ %s\n", 
-          t.no, t.travelTitle, t.Destnation, 
-          t.startDate, t.endDate);
+          t.getNo(), t.getTravelTitle(), t.getDestnation(), 
+          t.getStartDate(), t.getEndDate());
     }
     System.out.println();
   }
