@@ -6,35 +6,52 @@ import sinyj0622.mytrip.domain.Member;
 
 public class MemberHandler {
 
-  Member[] members = new Member[MEMBER_SIZE];
+  Member[] members;
   int memberCount = 0;
   
   static final int MEMBER_SIZE = 100;
-  public static Scanner keyboard;
+  Scanner input;
+  
+  
+  public MemberHandler(Scanner input) {
+	  this.input = input;
+	  this.members = new Member[MEMBER_SIZE];
+  }
+  
+  public MemberHandler(Scanner input, int capacity) {
+	  this.input = input;
+	  if (capacity < MEMBER_SIZE || capacity > 10000)
+		  this.members = new Member[MEMBER_SIZE];
+	  else
+		  this.members = new Member[capacity];
+  }
+  
+  
+  
 
   public void addMember() {
     Member member = new Member();
     System.out.print("번호: ");
-    member.no = keyboard.nextInt();
-    keyboard.nextLine();
+    member.no = input.nextInt();
+    input.nextLine();
 
     System.out.print("이름: ");
-    member.name = keyboard.nextLine();
+    member.name = input.nextLine();
 
     System.out.print("별명: ");
-    member.nickname = keyboard.nextLine();
+    member.nickname = input.nextLine();
 
     System.out.print("암호: ");
-    member.passWord = keyboard.nextLine();
+    member.passWord = input.nextLine();
 
     System.out.print("이메일: ");
-    member.email = keyboard.nextLine();
+    member.email = input.nextLine();
 
     System.out.print("사진: ");
-    member.myphoto = keyboard.nextLine();
+    member.myphoto = input.nextLine();
 
     System.out.print("전화: ");
-    member.phonenumber = keyboard.nextLine();
+    member.phonenumber = input.nextLine();
 
     member.registeredDate = new Date(System.currentTimeMillis());
 

@@ -11,34 +11,48 @@ public class TravelPlanHandler {
   int travelplansCount = 0;
   
   static final int TRAVELPLANS_SIZE = 100;
-  public static Scanner keyboard;
+  Scanner input;
+  
+  
+  public TravelPlanHandler(Scanner input) {
+	  this.input = input;
+  }
+  
+  public TravelPlanHandler(Scanner input, int capacity) {
+	  this.input = input;
+	  if (capacity < TRAVELPLANS_SIZE || capacity > 10000)
+		  this.travelPlans = new TravelPlan[TRAVELPLANS_SIZE];
+	  else
+		  this.travelPlans = new TravelPlan[capacity];
+  }
+  
   
   public void addTravelPlan() {
     TravelPlan travelPlan = new TravelPlan();
 
     System.out.print("번호: ");
-    travelPlan.no = keyboard.nextInt();
-    keyboard.nextLine();
+    travelPlan.no = input.nextInt();
+    input.nextLine();
 
     System.out.print("여행 제목? ");
-    travelPlan.travelTitle = keyboard.nextLine();
+    travelPlan.travelTitle = input.nextLine();
 
     System.out.print("어디로 떠나세요?: ");
-    travelPlan.Destnation = keyboard.nextLine();
+    travelPlan.Destnation = input.nextLine();
 
     System.out.print("여행 인원? ");
-    travelPlan.person = keyboard.nextInt();
-    keyboard.nextLine();
+    travelPlan.person = input.nextInt();
+    input.nextLine();
 
     System.out.print("여행 시작일? ");
-    travelPlan.startDate = Date.valueOf(keyboard.nextLine());
+    travelPlan.startDate = Date.valueOf(input.nextLine());
 
     System.out.print("여행 종료일? ");
-    travelPlan.endDate = Date.valueOf(keyboard.nextLine());
+    travelPlan.endDate = Date.valueOf(input.nextLine());
 
     System.out.print("예상 경비? ");
-    travelPlan.travelMoney = keyboard.nextInt();
-    keyboard.nextLine();
+    travelPlan.travelMoney = input.nextInt();
+    input.nextLine();
 
     this.travelPlans[this.travelplansCount++] = travelPlan;
     System.out.println("여행 계획을 저장하였습니다.");
