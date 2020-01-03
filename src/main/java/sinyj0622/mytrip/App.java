@@ -3,7 +3,7 @@ package sinyj0622.mytrip;
 import java.util.Scanner;
 import sinyj0622.mytrip.handler.BoardHandler;
 import sinyj0622.mytrip.handler.MemberHandler;
-import sinyj0622.mytrip.handler.TravelPlanHandler;
+import sinyj0622.mytrip.handler.PlanHandler;
 
 public class App{
 
@@ -18,7 +18,7 @@ public class App{
     BoardHandler edit4 = new BoardHandler(keyboard);
     BoardHandler edit5 = new BoardHandler(keyboard);
     MemberHandler memberEdit1 = new MemberHandler(keyboard);
-    TravelPlanHandler planEdit1 = new TravelPlanHandler(keyboard);
+    PlanHandler planEdit1 = new PlanHandler(keyboard);
     
 
     String command;

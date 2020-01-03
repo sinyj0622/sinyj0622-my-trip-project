@@ -6,28 +6,17 @@ import sinyj0622.mytrip.domain.Member;
 
 public class MemberHandler {
 
-  Member[] members;
-  int memberCount = 0;
   
-  static final int MEMBER_SIZE = 100;
+  MemberList memberList;
+
   Scanner input;
-  
-  
+
+
   public MemberHandler(Scanner input) {
-	  this.input = input;
-	  this.members = new Member[MEMBER_SIZE];
+    this.input = input;
+    this.memberList = new MemberList();  
   }
-  
-  public MemberHandler(Scanner input, int capacity) {
-	  this.input = input;
-	  if (capacity < MEMBER_SIZE || capacity > 10000)
-		  this.members = new Member[MEMBER_SIZE];
-	  else
-		  this.members = new Member[capacity];
-  }
-  
-  
-  
+
 
   public void addMember() {
     Member member = new Member();
@@ -55,19 +44,18 @@ public class MemberHandler {
 
     member.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    this.members[this.memberCount++] = member;
+    this.memberList.add(member);
     System.out.println("회원 정보를 저장하였습니다.");
     System.out.println();
-    
+
   }
 
   public void listMember() {
-    for (int i = 0; i < this.memberCount; i++){
-      Member m = this.members[i];
+    Member[] members = this.memberList.toArray();
+    for (Member m : members)
       System.out.printf("%d, %s, %s, %s, %s\n", 
           m.getNo(), m.getName(), m.getEmail(), m.getPhonenumber(), m.getRegisteredDate());
-    }
-    System.out.println();
+
   }
-  
+
 }

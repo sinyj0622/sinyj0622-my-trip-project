@@ -2,7 +2,7 @@ package sinyj0622.mytrip.domain;
 
 import java.sql.Date;
 
-public class TravelPlan {
+public class Plan {
 	private int no;
 	private String Destnation;
 	private String travelTitle;
