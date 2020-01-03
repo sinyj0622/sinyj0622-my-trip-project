@@ -7,14 +7,14 @@ import sinyj0622.mytrip.domain.Board;
 public class BoardHandler {
 
 
-  BoardList boardList;
+  ArrayList boardList;
 
   Scanner input;
 
 
   public BoardHandler(Scanner input) {
     this.input = input;
-    this.boardList = new BoardList();
+    this.boardList = new ArrayList();
   }
 
 
@@ -40,11 +40,13 @@ public class BoardHandler {
   }
 
   public void listBoard() {
-    Board[] board= this.boardList.toArray();
-    for (Board b : board)
+    Object[] arr = this.boardList.toArray();
+    for (Object obj : arr) {
+      Board b = (Board)obj;
       System.out.printf("%d, %s, %s, %d\n", 
           b.getNo(), b.getText(), b.getDate(), b.getViewCount());
-    System.out.println();
+    }
+      System.out.println();
   }
 
 
@@ -53,16 +55,16 @@ public class BoardHandler {
     int no = input.nextInt();
     input.nextLine();
 
-    Board board = this.boardList.get(no);
+    Board b = (Board) this.boardList.get(no);
 
-    if (board == null) {
+    if (b == null) {
       System.out.println("게시물 번호가 유효하지 않습니다.");
       return;
     }
-    System.out.printf("번호: %d\n", board.getNo());
-    System.out.printf("제목: %s\n", board.getText() );
-    System.out.printf("등록일: %s\n", board.getDate());
-    System.out.printf("조회수: %d\n", board.getViewCount());
+    System.out.printf("번호: %d\n", b.getNo());
+    System.out.printf("제목: %s\n", b.getText() );
+    System.out.printf("등록일: %s\n", b.getDate());
+    System.out.printf("조회수: %d\n", b.getViewCount());
 
     System.out.println();
 

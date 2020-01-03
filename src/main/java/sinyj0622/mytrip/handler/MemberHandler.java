@@ -7,14 +7,14 @@ import sinyj0622.mytrip.domain.Member;
 public class MemberHandler {
 
   
-  MemberList memberList;
+  ArrayList memberList;
 
   Scanner input;
 
 
   public MemberHandler(Scanner input) {
     this.input = input;
-    this.memberList = new MemberList();  
+    this.memberList = new ArrayList();  
   }
 
 
@@ -51,11 +51,12 @@ public class MemberHandler {
   }
 
   public void listMember() {
-    Member[] members = this.memberList.toArray();
-    for (Member m : members)
+    Object[] arr = this.memberList.toArray();
+    for (Object obj : arr) {
+      Member m = (Member)obj;
       System.out.printf("%d, %s, %s, %s, %s\n", 
           m.getNo(), m.getName(), m.getEmail(), m.getPhonenumber(), m.getRegisteredDate());
-
+    }
   }
 
 }

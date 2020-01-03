@@ -6,14 +6,14 @@ import sinyj0622.mytrip.domain.Plan;
 
 public class PlanHandler {
 
-  PlanList planList;
+  ArrayList planList;
 
   Scanner input;
 
 
   public PlanHandler(Scanner input) {
     this.input = input;
-    this.planList = new PlanList();
+    this.planList = new ArrayList();
   }
 
 
@@ -52,11 +52,12 @@ public class PlanHandler {
   }
 
   public void listTravelPlan() {
-    Plan[] plan = this.planList.toArray();
-    for(Plan p : plan)
+    Object[] arr = this.planList.toArray();
+    for(Object obj : arr) {
+      Plan p = (Plan)obj;
       System.out.printf("%d, %s, %s, %s ~ %s\n", 
           p.getNo(), p.getTravelTitle(), p.getDestnation(), 
           p.getStartDate(), p.getEndDate());
-    
+    }
   }
 }
