@@ -1,8 +1,8 @@
-package sinyj0622.mytrip.handler;
+package sinyj0622.mytrip.util;
 
 import java.util.Arrays;
 
-public class ArrayList {
+public class ArrayList<E> {
 
   static final int DEFAULT_CAPACITY = 100;
 
@@ -23,7 +23,7 @@ public class ArrayList {
   }
 
 
-  public void add(Object obj) {
+  public void add(E obj) {
     if (this.list.length == this.size) {
       int oldCapacity = this.list.length;
       int newCapacity = oldCapacity + (oldCapacity >> 1);
@@ -34,19 +34,27 @@ public class ArrayList {
   }
 
 
-  public Object[] toArray() {
-    return Arrays.copyOf(this.list, this.size);
-
+  @SuppressWarnings("unchecked")
+  public E[] toArray(E[] arr) {
+    if (arr.length < this.size) {
+    return (E[])Arrays.copyOf(this.list, this.size, arr.getClass());
+  }
+    System.arraycopy(this.list, 0, arr, 0, this.size);
+    return arr;
   }
 
 
-  public Object get(int idx) {
+  public E get(int idx) {
     if (idx >= 0 && idx < this.size) {
-      return this.list[idx];
+      return (E)this.list[idx];
     } else {
       return null;
     }
   }
 
+  
+  public int size() {
+    return this.size;
+  }
 
 }

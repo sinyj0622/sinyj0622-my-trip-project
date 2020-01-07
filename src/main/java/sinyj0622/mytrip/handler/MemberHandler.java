@@ -3,18 +3,19 @@ package sinyj0622.mytrip.handler;
 import java.sql.Date;
 import java.util.Scanner;
 import sinyj0622.mytrip.domain.Member;
+import sinyj0622.mytrip.util.ArrayList;
 
 public class MemberHandler {
 
   
-  ArrayList memberList;
+  ArrayList<Member> memberList;
 
   Scanner input;
 
 
   public MemberHandler(Scanner input) {
     this.input = input;
-    this.memberList = new ArrayList();  
+    this.memberList = new ArrayList<>();  
   }
 
 
@@ -51,9 +52,11 @@ public class MemberHandler {
   }
 
   public void listMember() {
-    Object[] arr = this.memberList.toArray();
-    for (Object obj : arr) {
-      Member m = (Member)obj;
+    
+    Member[] arr = new Member[this.memberList.size()];
+    
+    this.memberList.toArray(arr);
+    for (Member m : arr) {
       System.out.printf("%d, %s, %s, %s, %s\n", 
           m.getNo(), m.getName(), m.getEmail(), m.getPhonenumber(), m.getRegisteredDate());
     }

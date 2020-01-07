@@ -13,10 +13,6 @@ public class App{
 
     
     BoardHandler edit1 = new BoardHandler(keyboard);
-    BoardHandler edit2 = new BoardHandler(keyboard);
-    BoardHandler edit3 = new BoardHandler(keyboard);
-    BoardHandler edit4 = new BoardHandler(keyboard);
-    BoardHandler edit5 = new BoardHandler(keyboard);
     MemberHandler memberEdit1 = new MemberHandler(keyboard);
     PlanHandler planEdit1 = new PlanHandler(keyboard);
     
@@ -27,63 +23,28 @@ public class App{
       command = keyboard.nextLine();
 
       switch (command) {
-        case "여행계획/추가":
+        case "/plan/add":
           planEdit1.addTravelPlan();
           break;
-        case "여행계획/목록":
+        case "/plan/list":
           planEdit1.listTravelPlan();
           break;
-        case "회원정보/추가":  
+        case "/member/add":  
           memberEdit1.addMember();
           break;
-        case "회원정보/목록":  
+        case "/member/list":  
           memberEdit1.listMember();
           break;      
-        case "게시글/추가":
+        case "/board/add":
           edit1.addBoard();
           break;          
-        case "게시글/목록":
+        case "/board/list":
           edit1.listBoard();
           break;
-        case "게시글/세부사항":
+        case "/board/detail":
           edit1.detailBoard();
           break;
-        case "게시글2/추가":
-          edit2.addBoard();
-          break;          
-        case "게시글2/목록":
-          edit2.listBoard();
-          break;
-        case "게시글2/세부사항":
-          edit2.detailBoard();
-          break;
-        case "게시글3/추가":
-          edit3.addBoard();
-          break;          
-        case "게시글3/목록":
-          edit3.listBoard();
-          break;
-        case "게시글3/세부사항":
-          edit3.detailBoard();
-          break;
-        case "게시글4/추가":
-          edit4.addBoard();
-          break;          
-        case "게시글4/목록":
-          edit4.listBoard();
-          break;
-        case "게시글4/세부사항":
-          edit4.detailBoard();
-          break;
-        case "게시글5/추가":
-          edit5.addBoard();
-          break;          
-        case "게시글5/목록":
-          edit5.listBoard();
-          break;
-        case "게시글5/세부사항":
-          edit5.detailBoard();
-          break;
+        
         default:
           if (!command.equalsIgnoreCase("quit")) {
             System.out.println("실행할 수 없는 명령입니다.");

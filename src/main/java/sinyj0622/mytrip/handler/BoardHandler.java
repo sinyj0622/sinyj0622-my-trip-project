@@ -3,20 +3,25 @@ package sinyj0622.mytrip.handler;
 import java.sql.Date;
 import java.util.Scanner;
 import sinyj0622.mytrip.domain.Board;
+import sinyj0622.mytrip.util.ArrayList;
 
 public class BoardHandler {
 
 
-  ArrayList boardList;
+  ArrayList<Board> boardList;
 
   Scanner input;
 
 
   public BoardHandler(Scanner input) {
     this.input = input;
-    this.boardList = new ArrayList();
+    this.boardList = new ArrayList<Board>();
   }
-
+  
+  public BoardHandler(Scanner input, int capacity) {
+    this.input = input;
+    this.boardList = new ArrayList<>(capacity);
+  }
 
   public void addBoard() {
     Board board = new Board();
@@ -40,9 +45,12 @@ public class BoardHandler {
   }
 
   public void listBoard() {
-    Object[] arr = this.boardList.toArray();
-    for (Object obj : arr) {
-      Board b = (Board)obj;
+    
+    Board[] arr = new Board[this.boardList.size()];
+    
+    this.boardList.toArray(arr);
+    
+    for (Board b : arr) {
       System.out.printf("%d, %s, %s, %d\n", 
           b.getNo(), b.getText(), b.getDate(), b.getViewCount());
     }
@@ -51,14 +59,14 @@ public class BoardHandler {
 
 
   public void detailBoard() {
-    System.out.print("게시글 번호? ");
+    System.out.print("인덱스 번호? ");
     int no = input.nextInt();
     input.nextLine();
 
     Board b = (Board) this.boardList.get(no);
 
     if (b == null) {
-      System.out.println("게시물 번호가 유효하지 않습니다.");
+      System.out.println("인덱스 번호가 유효하지 않습니다.");
       return;
     }
     System.out.printf("번호: %d\n", b.getNo());

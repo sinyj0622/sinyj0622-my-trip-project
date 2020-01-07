@@ -3,17 +3,18 @@ package sinyj0622.mytrip.handler;
 import java.sql.Date;
 import java.util.Scanner;
 import sinyj0622.mytrip.domain.Plan;
+import sinyj0622.mytrip.util.ArrayList;
 
 public class PlanHandler {
 
-  ArrayList planList;
+  ArrayList<Plan> planList;
 
   Scanner input;
 
 
   public PlanHandler(Scanner input) {
     this.input = input;
-    this.planList = new ArrayList();
+    this.planList = new ArrayList<Plan>();
   }
 
 
@@ -52,9 +53,9 @@ public class PlanHandler {
   }
 
   public void listTravelPlan() {
-    Object[] arr = this.planList.toArray();
-    for(Object obj : arr) {
-      Plan p = (Plan)obj;
+    Plan[] arr = new Plan[this.planList.size()];
+    this.planList.toArray(arr);
+    for(Plan p : arr) {
       System.out.printf("%d, %s, %s, %s ~ %s\n", 
           p.getNo(), p.getTravelTitle(), p.getDestnation(), 
           p.getStartDate(), p.getEndDate());
