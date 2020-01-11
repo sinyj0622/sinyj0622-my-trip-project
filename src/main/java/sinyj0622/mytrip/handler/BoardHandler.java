@@ -15,7 +15,7 @@ public class BoardHandler {
 
   public BoardHandler(Scanner input) {
     this.input = input;
-    this.boardList = new ArrayList<Board>();
+    this.boardList = new ArrayList<>();
   }
   
   public BoardHandler(Scanner input, int capacity) {
@@ -59,23 +59,84 @@ public class BoardHandler {
 
 
   public void detailBoard() {
-    System.out.print("인덱스 번호? ");
+    System.out.print("번호? ");
     int no = input.nextInt();
     input.nextLine();
 
-    Board b = (Board) this.boardList.get(no);
-
-    if (b == null) {
-      System.out.println("인덱스 번호가 유효하지 않습니다.");
+    int index = indexOfBoard(no);
+   
+    if (index == -1) {
+      System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
-    System.out.printf("번호: %d\n", b.getNo());
-    System.out.printf("제목: %s\n", b.getText() );
-    System.out.printf("등록일: %s\n", b.getDate());
-    System.out.printf("조회수: %d\n", b.getViewCount());
+    
+    Board board = this.boardList.get(index);
+    System.out.printf("번호: %d\n", board.getNo());
+    System.out.printf("내용: %s\n", board.getText() );
+    System.out.printf("등록일: %s\n", board.getDate());
+    System.out.printf("조회수: %d\n", board.getViewCount());
 
     System.out.println();
 
   }
+  
+  public void updateBoard() {
+    System.out.print("번호? ");
+    int no = input.nextInt();
+    input.nextLine();
+    
+    int index = indexOfBoard(no);
+    
+    
+    if (index == -1) {
+      System.out.println("해당 번호의 게시글이 없습니다.");
+      return;
+    }
+    
+    Board oldBoard = this.boardList.get(index);
+    System.out.printf("내용(%s)?", oldBoard.getText());
+    String text = input.nextLine();
 
+    if (text.length() == 0) {
+      System.out.println("게시글 변경을 취소했습니다.");
+      return;
+    }
+    
+    Board newBoard = new Board();
+    newBoard.setViewCount(oldBoard.getViewCount());
+    newBoard.setNo(oldBoard.getNo());
+    newBoard.setText(text);
+    newBoard.setDate(new Date(System.currentTimeMillis()));
+    
+    this.boardList.set(index, newBoard);
+    
+    System.out.println("게시글을 변경했습니다.");
+  }
+  
+  public void deleteBoard() {
+    System.out.print("번호? ");
+    int no = input.nextInt();
+    input.nextLine();
+    
+    int index = indexOfBoard(no);
+    
+    
+    if (index == -1) {
+      System.out.println("해당 번호의 게시글이 없습니다.");
+      return;
+    }
+    
+    this.boardList.remove(index);
+    
+    System.out.println("게시글을 삭제했습니다.");
+  }
+  
+  private int indexOfBoard(int no) {
+    for (int i = 0; i < this.boardList.size(); i++) {
+      if (this.boardList.get(i).getNo() == no) {
+        return i;
+      }
+    }
+    return -1;
+  }
 }
