@@ -87,7 +87,6 @@ public class MemberHandler {
     newMember.setName(prompt.inputString(String.format("이름(%s)?", 
         oldMember.getName()),oldMember.getName()));
     
-    
     newMember.setNickname(prompt.inputString(String.format("별명(%s)?", 
         oldMember.getNickname()), oldMember.getNickname()));
     
@@ -102,38 +101,7 @@ public class MemberHandler {
     
     newMember.setPhonenumber(prompt.inputString(String.format("전화(%s)?", 
         oldMember.getPhonenumber()), oldMember.getPhonenumber()));
-    
 
-
-    System.out.printf("이메일(%s)?", oldMember.getEmail());
-    inputStr = prompt.nextLine();
-    if (inputStr.length() == 0) {
-      newMember.setEmail(oldMember.getEmail());
-    } else {
-      newMember.setEmail(inputStr);
-      changed = true;
-    }
-    
-    System.out.printf("사진(%s)?", oldMember.getMyphoto());
-    inputStr = prompt.nextLine();
-    if (inputStr.length() == 0) {
-      newMember.setMyphoto(oldMember.getMyphoto());
-    } else {
-      newMember.setMyphoto(inputStr);
-      changed = true;
-    }
-    
-    System.out.printf("전화(%s)?", oldMember.getPhonenumber());
-    inputStr = prompt.nextLine();
-    if (inputStr.length() == 0) {
-      newMember.setPhonenumber(oldMember.getPhonenumber());
-    } else {
-      newMember.setPhonenumber(inputStr);
-      changed = true;
-    }
-   
-   
-    
 
     if (changed) {
       this.memberList.set(index, newMember);
@@ -145,11 +113,7 @@ public class MemberHandler {
   }
   
   public void deleteMember() {
-    System.out.print("번호? ");
-    int no = prompt.nextInt();
-    prompt.nextLine();
-    
-    int index = indexOfMember(no);
+    int index = indexOfMember(prompt.inputInt("번호? "));
     
     if (index == -1) {
       System.out.println("해당 번호의 회원이 없습니다.");
