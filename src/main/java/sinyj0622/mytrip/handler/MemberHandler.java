@@ -4,45 +4,31 @@ import java.sql.Date;
 import java.util.Scanner;
 import sinyj0622.mytrip.domain.Member;
 import sinyj0622.mytrip.util.ArrayList;
+import sinyj0622.mytrip.util.Prompt;
 
 public class MemberHandler {
 
   
   ArrayList<Member> memberList;
 
-  Scanner input;
+  Prompt prompt;
 
 
   public MemberHandler(Scanner input) {
-    this.input = input;
+    this.prompt = prompt;
     this.memberList = new ArrayList<>();  
   }
 
 
   public void addMember() {
     Member member = new Member();
-    System.out.print("번호: ");
-    member.setNo(input.nextInt());
-    input.nextLine();
-
-    System.out.print("이름: ");
-    member.setName(input.nextLine());
-
-    System.out.print("별명: ");
-    member.setNickname(input.nextLine());
-
-    System.out.print("암호: ");
-    member.setPassWord(input.nextLine());
-
-    System.out.print("이메일: ");
-    member.setEmail(input.nextLine());
-
-    System.out.print("사진: ");
-    member.setMyphoto(input.nextLine());
-
-    System.out.print("전화: ");
-    member.setPhonenumber(input.nextLine());
-
+    member.setNo(prompt.inputInt("번호: "));
+    member.setName(prompt.inputString("이름: "));
+    member.setNickname(prompt.inputString("별명: "));
+    member.setPassWord(prompt.inputString("암호: "));
+    member.setEmail(prompt.inputString("이메일: "));
+    member.setMyphoto(prompt.inputString("사진: "));
+    member.setPhonenumber(prompt.inputString("전화: "));
     member.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     this.memberList.add(member);
@@ -63,11 +49,7 @@ public class MemberHandler {
   }
   
   public void detailMember() {
-    System.out.print("번호? ");
-    int no = input.nextInt();
-    input.nextLine();
-    
-    int index = indexOfMember(no);
+    int index = indexOfMember(prompt.inputInt("번호? "));
     
     if (index == -1) {
       System.out.println("해당 번호의 회원이 없습니다.");
@@ -88,11 +70,7 @@ public class MemberHandler {
   }
   
   public void updateMember() {
-    System.out.print("번호? ");
-    int no = input.nextInt();
-    input.nextLine();
-    
-    int index = indexOfMember(no);
+    int index = indexOfMember(prompt.inputInt("번호? "));
     
     if (index == -1) {
       System.out.println("해당 번호의 회원이 없습니다.");
@@ -105,36 +83,30 @@ public class MemberHandler {
     boolean changed = false;
     String inputStr = null;
     newMember.setNo(oldMember.getNo());
-    
-    System.out.printf("이름(%s)?", oldMember.getName());
-    inputStr = input.nextLine();
-    if (inputStr.length() == 0) {
-      newMember.setName(oldMember.getName());
-    } else {
-      newMember.setName(inputStr);
-      changed = true;
-    }
 
-    System.out.printf("별명(%s)?", oldMember.getNickname());
-    inputStr = input.nextLine();
-    if (inputStr.length() == 0) {
-      newMember.setNickname(oldMember.getNickname());
-    } else {
-      newMember.setNickname(inputStr);
-      changed = true;
-    }
-
-    System.out.printf("암호(%s)?", oldMember.getPassWord());
-    inputStr = input.nextLine();
-    if (inputStr.length() == 0) {
-      newMember.setPassWord(oldMember.getPassWord());
-    } else {
-      newMember.setPassWord(inputStr);
-      changed = true;
-    }
+    newMember.setName(prompt.inputString(String.format("이름(%s)?", 
+        oldMember.getName()),oldMember.getName()));
     
+    
+    newMember.setNickname(prompt.inputString(String.format("별명(%s)?", 
+        oldMember.getNickname()), oldMember.getNickname()));
+    
+    newMember.setPassWord(prompt.inputString(String.format("암호(%s)?", 
+        oldMember.getPassWord()), oldMember.getPassWord()));
+    
+    newMember.setEmail(prompt.inputString(String.format("이메일(%s)?", 
+        oldMember.getEmail()), oldMember.getEmail()));
+    
+    newMember.setMyphoto(prompt.inputString(String.format("사진(%s)?", 
+        oldMember.getMyphoto()), oldMember.getMyphoto()));
+    
+    newMember.setPhonenumber(prompt.inputString(String.format("전화(%s)?", 
+        oldMember.getPhonenumber()), oldMember.getPhonenumber()));
+    
+
+
     System.out.printf("이메일(%s)?", oldMember.getEmail());
-    inputStr = input.nextLine();
+    inputStr = prompt.nextLine();
     if (inputStr.length() == 0) {
       newMember.setEmail(oldMember.getEmail());
     } else {
@@ -143,7 +115,7 @@ public class MemberHandler {
     }
     
     System.out.printf("사진(%s)?", oldMember.getMyphoto());
-    inputStr = input.nextLine();
+    inputStr = prompt.nextLine();
     if (inputStr.length() == 0) {
       newMember.setMyphoto(oldMember.getMyphoto());
     } else {
@@ -152,7 +124,7 @@ public class MemberHandler {
     }
     
     System.out.printf("전화(%s)?", oldMember.getPhonenumber());
-    inputStr = input.nextLine();
+    inputStr = prompt.nextLine();
     if (inputStr.length() == 0) {
       newMember.setPhonenumber(oldMember.getPhonenumber());
     } else {
@@ -174,8 +146,8 @@ public class MemberHandler {
   
   public void deleteMember() {
     System.out.print("번호? ");
-    int no = input.nextInt();
-    input.nextLine();
+    int no = prompt.nextInt();
+    prompt.nextLine();
     
     int index = indexOfMember(no);
     
