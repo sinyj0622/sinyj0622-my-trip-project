@@ -4,6 +4,7 @@ import java.util.Scanner;
 import sinyj0622.mytrip.handler.BoardHandler;
 import sinyj0622.mytrip.handler.MemberHandler;
 import sinyj0622.mytrip.handler.PlanHandler;
+import sinyj0622.mytrip.util.Prompt;
 
 public class App{
 
@@ -11,10 +12,12 @@ public class App{
 
   public static void main(String[] args) {
 
+	  
+	 Prompt prompt = new Prompt(keyboard);
 
-    BoardHandler edit1 = new BoardHandler(keyboard);
-    MemberHandler memberEdit1 = new MemberHandler(keyboard);
-    PlanHandler planEdit1 = new PlanHandler(keyboard);
+    BoardHandler edit1 = new BoardHandler(prompt);
+    MemberHandler memberEdit1 = new MemberHandler(prompt);
+    PlanHandler planEdit1 = new PlanHandler(prompt);
 
 
     String command;

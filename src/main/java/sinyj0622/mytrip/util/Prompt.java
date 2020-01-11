@@ -17,7 +17,7 @@ public class Prompt {
   }
   
   public String inputString(String label, String defaultValue) {
-    System.out.println(label);
+    System.out.print(label);
     String value = input.nextLine();
     if (value.length() == 0) {
       return defaultValue;
@@ -26,12 +26,12 @@ public class Prompt {
   }
   
   public int inputInt(String label) {
-    System.out.println(label);
+    System.out.print(label);
     return Integer.parseInt(input.nextLine());
   }
   
   public int inputInt(String label, int dafaultValue) {
-    System.out.println(label);
+    System.out.print(label);
     String value = input.nextLine();
     if (value.length() == 0) {
       return dafaultValue;
@@ -40,12 +40,12 @@ public class Prompt {
   }
   
   public Date inputDate(String label) {
-    System.out.println(label);
+    System.out.print(label);
     return Date.valueOf(input.nextLine());
   }
   
   public Date inputDate(String label, Date defaultValue) {
-    System.out.println(label);
+    System.out.print(label);
     String value = input.nextLine();
     if (value.length() == 0) {
       return defaultValue;

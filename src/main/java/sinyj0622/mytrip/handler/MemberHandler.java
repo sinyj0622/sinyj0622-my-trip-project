@@ -14,7 +14,7 @@ public class MemberHandler {
   Prompt prompt;
 
 
-  public MemberHandler(Scanner input) {
+  public MemberHandler(Prompt prompt) {
     this.prompt = prompt;
     this.memberList = new ArrayList<>();  
   }
@@ -33,7 +33,6 @@ public class MemberHandler {
 
     this.memberList.add(member);
     System.out.println("회원 정보를 저장하였습니다.");
-    System.out.println();
 
   }
 
@@ -65,7 +64,6 @@ public class MemberHandler {
     System.out.printf("사진: %s\n", member.getMyphoto());
     System.out.printf("전화: %s\n", member.getPhonenumber());
 
-    System.out.println();
 
   }
   
@@ -80,7 +78,7 @@ public class MemberHandler {
     Member oldMember = this.memberList.get(index);
     Member newMember = new Member();
     
-    boolean changed = false;
+
     String inputStr = null;
     newMember.setNo(oldMember.getNo());
 
@@ -103,12 +101,12 @@ public class MemberHandler {
         oldMember.getPhonenumber()), oldMember.getPhonenumber()));
 
 
-    if (changed) {
+    if (oldMember.equals(newMember)) {
+        System.out.println("회원 변경을 취소하였습니다.");
+        return;
+      }
       this.memberList.set(index, newMember);
       System.out.println("회원을 변경했습니다.");
-    } else {
-      System.out.println("회원 변경을 취소하였습니다.");
-    }
     
   }
   

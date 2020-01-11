@@ -4,43 +4,38 @@ import java.sql.Date;
 import java.util.Scanner;
 import sinyj0622.mytrip.domain.Board;
 import sinyj0622.mytrip.util.ArrayList;
+import sinyj0622.mytrip.util.Prompt;
 
 public class BoardHandler {
 
 
   ArrayList<Board> boardList;
 
-  Scanner input;
+  Prompt prompt;
 
 
-  public BoardHandler(Scanner input) {
-    this.input = input;
+  public BoardHandler(Prompt prompt) {
+    this.prompt = prompt;
     this.boardList = new ArrayList<>();
   }
   
-  public BoardHandler(Scanner input, int capacity) {
-    this.input = input;
+  public BoardHandler(Prompt prompt, int capacity) {
+    this.prompt = prompt;
     this.boardList = new ArrayList<>(capacity);
   }
 
   public void addBoard() {
     Board board = new Board();
 
-    System.out.print("번호: ");
-    board.setNo(input.nextInt());
-    input.nextLine();
 
-    System.out.print("내용: ");
-    board.setText(input.nextLine());
-
-
+    board.setNo(prompt.inputInt("번호: "));
+    board.setText(prompt.inputString("내용: "));
     board.setDate(new Date(System.currentTimeMillis()));
     board.setViewCount(0);
 
 
     this.boardList.add(board);
     System.out.println("내용을 저장하였습니다.");
-    System.out.println();
 
   }
 
@@ -54,16 +49,13 @@ public class BoardHandler {
       System.out.printf("%d, %s, %s, %d\n", 
           b.getNo(), b.getText(), b.getDate(), b.getViewCount());
     }
-      System.out.println();
+
   }
 
 
   public void detailBoard() {
-    System.out.print("번호? ");
-    int no = input.nextInt();
-    input.nextLine();
-
-    int index = indexOfBoard(no);
+  
+    int index = indexOfBoard(prompt.inputInt("번호? "));
    
     if (index == -1) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -76,16 +68,11 @@ public class BoardHandler {
     System.out.printf("등록일: %s\n", board.getDate());
     System.out.printf("조회수: %d\n", board.getViewCount());
 
-    System.out.println();
-
   }
   
   public void updateBoard() {
-    System.out.print("번호? ");
-    int no = input.nextInt();
-    input.nextLine();
     
-    int index = indexOfBoard(no);
+    int index = indexOfBoard(prompt.inputInt("번호? "));
     
     
     if (index == -1) {
@@ -94,8 +81,7 @@ public class BoardHandler {
     }
     
     Board oldBoard = this.boardList.get(index);
-    System.out.printf("내용(%s)?", oldBoard.getText());
-    String text = input.nextLine();
+    String text = prompt.inputString("내용(%s)?", oldBoard.getText());
 
     if (text.length() == 0) {
       System.out.println("게시글 변경을 취소했습니다.");
@@ -114,12 +100,8 @@ public class BoardHandler {
   }
   
   public void deleteBoard() {
-    System.out.print("번호? ");
-    int no = input.nextInt();
-    input.nextLine();
-    
-    int index = indexOfBoard(no);
-    
+	  
+    int index = indexOfBoard(prompt.inputInt("번호? "));
     
     if (index == -1) {
       System.out.println("해당 번호의 게시글이 없습니다.");
