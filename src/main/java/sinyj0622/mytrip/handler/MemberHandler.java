@@ -1,6 +1,7 @@
 package sinyj0622.mytrip.handler;
 
 import java.sql.Date;
+import java.util.LinkedList;
 import java.util.Scanner;
 import sinyj0622.mytrip.domain.Member;
 import sinyj0622.mytrip.util.ArrayList;
@@ -9,14 +10,14 @@ import sinyj0622.mytrip.util.Prompt;
 public class MemberHandler {
 
   
-  ArrayList<Member> memberList;
+	LinkedList<Member> memberList;
 
   Prompt prompt;
 
 
   public MemberHandler(Prompt prompt) {
     this.prompt = prompt;
-    this.memberList = new ArrayList<>();  
+    this.memberList = new LinkedList<>();  
   }
 
 

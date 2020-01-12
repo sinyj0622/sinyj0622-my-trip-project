@@ -77,7 +77,7 @@ public class App{
           }
       }
     } while (!command.equalsIgnoreCase("quit"));
-    System.out.println("안녕!");
+    System.out.println("종료하였습니다.");
     keyboard.close();
 
   }

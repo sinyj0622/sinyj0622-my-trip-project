@@ -1,6 +1,7 @@
 package sinyj0622.mytrip.handler;
 
 import java.sql.Date;
+import java.util.LinkedList;
 import java.util.Scanner;
 import sinyj0622.mytrip.domain.Board;
 import sinyj0622.mytrip.util.ArrayList;
@@ -9,20 +10,16 @@ import sinyj0622.mytrip.util.Prompt;
 public class BoardHandler {
 
 
-  ArrayList<Board> boardList;
+	LinkedList<Board> boardList;
 
   Prompt prompt;
 
 
   public BoardHandler(Prompt prompt) {
     this.prompt = prompt;
-    this.boardList = new ArrayList<>();
+    this.boardList = new LinkedList<>();
   }
   
-  public BoardHandler(Prompt prompt, int capacity) {
-    this.prompt = prompt;
-    this.boardList = new ArrayList<>(capacity);
-  }
 
   public void addBoard() {
     Board board = new Board();

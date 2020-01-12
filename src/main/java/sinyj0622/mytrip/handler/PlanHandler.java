@@ -1,5 +1,6 @@
 package sinyj0622.mytrip.handler;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 import sinyj0622.mytrip.domain.Plan;
 import sinyj0622.mytrip.util.ArrayList;
@@ -7,14 +8,14 @@ import sinyj0622.mytrip.util.Prompt;
 
 public class PlanHandler {
 
-	ArrayList<Plan> planList;
+	LinkedList<Plan> planList;
 
 	Prompt prompt;
 
 
 	public PlanHandler(Prompt prompt) {
 		this.prompt = prompt;
-		this.planList = new ArrayList<Plan>();
+		this.planList = new LinkedList<Plan>();
 	}
 
 
