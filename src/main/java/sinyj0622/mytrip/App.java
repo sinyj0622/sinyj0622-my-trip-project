@@ -5,12 +5,14 @@ import sinyj0622.mytrip.handler.BoardHandler;
 import sinyj0622.mytrip.handler.MemberHandler;
 import sinyj0622.mytrip.handler.PlanHandler;
 import sinyj0622.mytrip.util.Prompt;
+import sinyj0622.mytrip.util.Queue;
 import sinyj0622.mytrip.util.Stack;
 
 public class App{
 
   static Scanner keyboard = new Scanner(System.in);
   static Stack<String> commandStack = new Stack<>();
+  static Queue<String> commandQueue = new Queue<>();
   
   public static void main(String[] args) {
 
@@ -28,6 +30,7 @@ public class App{
       command = keyboard.nextLine();
       
       commandStack.push(command);
+      commandQueue.offer(command);
 
       switch (command) {
         case "/plan/add":
@@ -78,6 +81,9 @@ public class App{
         case "history":
           printCommandHistory();
           break;
+        case "history2":
+          printCommandHistory2();
+          break;
         default:
           if (!command.equalsIgnoreCase("quit")) {
             System.out.println("실행할 수 없는 명령입니다.");
@@ -100,6 +106,23 @@ public class App{
         System.out.print(":");
         String str = keyboard.nextLine();
         if (str.equalsIgnoreCase("q")) {
+          break;
+        }
+      }
+    }
+  }
+  
+  public static void printCommandHistory2() {
+    Queue<String> historyQueue = commandQueue.clone();
+    int count = 0;
+    while (historyQueue.size() > 0) {
+      System.out.println(historyQueue.poll());
+      count++;
+      
+      if ((count % 5) == 0) {
+        System.out.print(":");
+        String str = keyboard.nextLine();
+        if(str.equalsIgnoreCase("q")) {
           break;
         }
       }
