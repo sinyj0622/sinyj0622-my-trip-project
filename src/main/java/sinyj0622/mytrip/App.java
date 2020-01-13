@@ -5,11 +5,13 @@ import sinyj0622.mytrip.handler.BoardHandler;
 import sinyj0622.mytrip.handler.MemberHandler;
 import sinyj0622.mytrip.handler.PlanHandler;
 import sinyj0622.mytrip.util.Prompt;
+import sinyj0622.mytrip.util.Stack;
 
 public class App{
 
   static Scanner keyboard = new Scanner(System.in);
-
+  static Stack<String> commandStack = new Stack<>();
+  
   public static void main(String[] args) {
 
 	  
@@ -24,6 +26,8 @@ public class App{
     do {
       System.out.print("명령> ");
       command = keyboard.nextLine();
+      
+      commandStack.push(command);
 
       switch (command) {
         case "/plan/add":
@@ -71,6 +75,9 @@ public class App{
         case "/board/delete":
           edit1.deleteBoard();
           break;
+        case "history":
+          printCommandHistory();
+          break;
         default:
           if (!command.equalsIgnoreCase("quit")) {
             System.out.println("실행할 수 없는 명령입니다.");
@@ -82,7 +89,22 @@ public class App{
 
   }
 
-
+  public static void printCommandHistory() {
+    Stack<String> historyStack = (Stack<String>) commandStack.clone();
+    int count = 0;
+    while(!historyStack.empty()) {
+      System.out.println(historyStack.pop());
+      count++;
+      
+      if ((count % 5) == 0) {
+        System.out.print(":");
+        String str = keyboard.nextLine();
+        if (str.equalsIgnoreCase("q")) {
+          break;
+        }
+      }
+    }
+  }
 
 
 
