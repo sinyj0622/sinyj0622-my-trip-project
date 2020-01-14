@@ -2,15 +2,14 @@ package sinyj0622.mytrip.util;
 
 import java.lang.reflect.Array;
 
-public class LinkedList<E> {
+public class LinkedList<E> extends AbstractList<E> {
 
 	Node<E> first;
 	Node<E> last;
-	int size;
 
-	public void add(E value) {
+	public void add(E e) {
 		Node<E> newNode = new Node<>();
-		newNode.value = value;
+		newNode.value = e;
 
 		if (first == null) {
 			last = first = newNode;
@@ -33,12 +32,12 @@ public class LinkedList<E> {
 		}
 	}
 
-	public void add(int index, E value) {
+	public void add(int index, E e) {
 		if (index < 0 || index >= size) {
 			return;
 		} else {
 			Node<E> newNode = new Node<E>();
-			newNode.value = value;
+			newNode.value = e;
 
 			if (first == null) {
 				last = first = newNode;
@@ -76,7 +75,7 @@ public class LinkedList<E> {
 	
 
 	@SuppressWarnings("unchecked")
-	public E set(int index, E value) {
+	public E set(int index, E e) {
 		if (index < 0 || index >= size) 
 			return null;
 		
@@ -86,7 +85,7 @@ public class LinkedList<E> {
 		}
 		
 		Object oldValue = cursor.value;
-		cursor.value = value;
+		cursor.value = e;
 		
 		return (E)oldValue;
 		
@@ -117,10 +116,6 @@ public class LinkedList<E> {
 		return arr;
 		}
 
-	
-	public int size() {
-		return this.size = size;
-	}
 	
 	
 	static class Node<T> {

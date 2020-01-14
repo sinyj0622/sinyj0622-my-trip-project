@@ -1,23 +1,21 @@
 package sinyj0622.mytrip.handler;
 
 import java.sql.Date;
-import java.util.LinkedList;
-import java.util.Scanner;
 import sinyj0622.mytrip.domain.Member;
-import sinyj0622.mytrip.util.ArrayList;
+import sinyj0622.mytrip.util.AbstractList;
 import sinyj0622.mytrip.util.Prompt;
 
 public class MemberHandler {
 
   
-	LinkedList<Member> memberList;
+  AbstractList<Member> memberList;
 
   Prompt prompt;
 
 
-  public MemberHandler(Prompt prompt) {
+  public MemberHandler(Prompt prompt, AbstractList<Member> list) {
     this.prompt = prompt;
-    this.memberList = new LinkedList<>();  
+    this.memberList = list;  
   }
 
 

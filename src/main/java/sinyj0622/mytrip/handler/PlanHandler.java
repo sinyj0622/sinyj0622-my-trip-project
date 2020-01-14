@@ -1,21 +1,19 @@
 package sinyj0622.mytrip.handler;
 
-import java.util.LinkedList;
-import java.util.Scanner;
 import sinyj0622.mytrip.domain.Plan;
-import sinyj0622.mytrip.util.ArrayList;
+import sinyj0622.mytrip.util.AbstractList;
 import sinyj0622.mytrip.util.Prompt;
 
 public class PlanHandler {
 
-	LinkedList<Plan> planList;
+	AbstractList<Plan> planList;
 
 	Prompt prompt;
 
 
-	public PlanHandler(Prompt prompt) {
+	public PlanHandler(Prompt prompt, AbstractList<Plan> list) {
 		this.prompt = prompt;
-		this.planList = new LinkedList<Plan>();
+		this.planList = list;
 	}
 
 

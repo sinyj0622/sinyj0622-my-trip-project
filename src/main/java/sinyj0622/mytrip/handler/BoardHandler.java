@@ -1,23 +1,21 @@
 package sinyj0622.mytrip.handler;
 
 import java.sql.Date;
-import java.util.LinkedList;
-import java.util.Scanner;
 import sinyj0622.mytrip.domain.Board;
-import sinyj0622.mytrip.util.ArrayList;
+import sinyj0622.mytrip.util.AbstractList;
 import sinyj0622.mytrip.util.Prompt;
 
 public class BoardHandler {
 
 
-	LinkedList<Board> boardList;
+  AbstractList<Board> boardList;
 
   Prompt prompt;
 
 
-  public BoardHandler(Prompt prompt) {
+  public BoardHandler(Prompt prompt, AbstractList<Board> list) {
     this.prompt = prompt;
-    this.boardList = new LinkedList<>();
+    this.boardList = list;
   }
   
 

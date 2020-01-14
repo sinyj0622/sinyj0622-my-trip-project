@@ -1,9 +1,14 @@
 package sinyj0622.mytrip;
 
 import java.util.Scanner;
+import sinyj0622.mytrip.domain.Board;
+import sinyj0622.mytrip.domain.Member;
+import sinyj0622.mytrip.domain.Plan;
 import sinyj0622.mytrip.handler.BoardHandler;
 import sinyj0622.mytrip.handler.MemberHandler;
 import sinyj0622.mytrip.handler.PlanHandler;
+import sinyj0622.mytrip.util.ArrayList;
+import sinyj0622.mytrip.util.LinkedList;
 import sinyj0622.mytrip.util.Prompt;
 import sinyj0622.mytrip.util.Queue;
 import sinyj0622.mytrip.util.Stack;
@@ -13,22 +18,27 @@ public class App{
   static Scanner keyboard = new Scanner(System.in);
   static Stack<String> commandStack = new Stack<>();
   static Queue<String> commandQueue = new Queue<>();
-  
+
   public static void main(String[] args) {
 
-	  
-	 Prompt prompt = new Prompt(keyboard);
 
-    BoardHandler edit1 = new BoardHandler(prompt);
-    MemberHandler memberEdit1 = new MemberHandler(prompt);
-    PlanHandler planEdit1 = new PlanHandler(prompt);
+    Prompt prompt = new Prompt(keyboard);
+
+    ArrayList<Board> boardList = new ArrayList<>();
+    BoardHandler boardedit1 = new BoardHandler(prompt, boardList);
+
+    LinkedList<Member> memberList = new LinkedList<>();
+    MemberHandler memberEdit1 = new MemberHandler(prompt, memberList);
+
+    ArrayList<Plan> planList = new ArrayList<>();
+    PlanHandler planEdit1 = new PlanHandler(prompt, planList);
 
 
     String command;
     do {
       System.out.print("명령> ");
       command = keyboard.nextLine();
-      
+
       commandStack.push(command);
       commandQueue.offer(command);
 
@@ -64,19 +74,19 @@ public class App{
           memberEdit1.deleteMember();
           break;
         case "/board/add":
-          edit1.addBoard();
+          boardedit1.addBoard();
           break;          
         case "/board/list":
-          edit1.listBoard();
+          boardedit1.listBoard();
           break;
         case "/board/detail":
-          edit1.detailBoard();
+          boardedit1.detailBoard();
           break;
         case "/board/update":
-          edit1.updateBoard();
+          boardedit1.updateBoard();
           break;
         case "/board/delete":
-          edit1.deleteBoard();
+          boardedit1.deleteBoard();
           break;
         case "history":
           printCommandHistory();
@@ -101,7 +111,7 @@ public class App{
     while(!historyStack.empty()) {
       System.out.println(historyStack.pop());
       count++;
-      
+
       if ((count % 5) == 0) {
         System.out.print(":");
         String str = keyboard.nextLine();
@@ -111,14 +121,14 @@ public class App{
       }
     }
   }
-  
+
   public static void printCommandHistory2() {
     Queue<String> historyQueue = commandQueue.clone();
     int count = 0;
     while (historyQueue.size() > 0) {
       System.out.println(historyQueue.poll());
       count++;
-      
+
       if ((count % 5) == 0) {
         System.out.print(":");
         String str = keyboard.nextLine();
