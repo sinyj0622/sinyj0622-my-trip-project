@@ -8,6 +8,7 @@ import sinyj0622.mytrip.handler.BoardHandler;
 import sinyj0622.mytrip.handler.MemberHandler;
 import sinyj0622.mytrip.handler.PlanHandler;
 import sinyj0622.mytrip.util.ArrayList;
+import sinyj0622.mytrip.util.Iterator;
 import sinyj0622.mytrip.util.LinkedList;
 import sinyj0622.mytrip.util.Prompt;
 import sinyj0622.mytrip.util.Queue;
@@ -89,10 +90,10 @@ public class App{
           boardedit1.deleteBoard();
           break;
         case "history":
-          printCommandHistory();
+          printCommandHistory(commandStack.iterator());
           break;
         case "history2":
-          printCommandHistory2();
+          printCommandHistory(commandQueue.iterator());
           break;
         default:
           if (!command.equalsIgnoreCase("quit")) {
@@ -105,11 +106,10 @@ public class App{
 
   }
 
-  public static void printCommandHistory() {
-    Stack<String> historyStack = (Stack<String>) commandStack.clone();
+  public static void printCommandHistory(Iterator<String> iterator) {
     int count = 0;
-    while(!historyStack.empty()) {
-      System.out.println(historyStack.pop());
+    while(iterator.hasNext()) {
+      System.out.println(iterator.next());
       count++;
 
       if ((count % 5) == 0) {
@@ -121,24 +121,6 @@ public class App{
       }
     }
   }
-
-  public static void printCommandHistory2() {
-    Queue<String> historyQueue = commandQueue.clone();
-    int count = 0;
-    while (historyQueue.size() > 0) {
-      System.out.println(historyQueue.poll());
-      count++;
-
-      if ((count % 5) == 0) {
-        System.out.print(":");
-        String str = keyboard.nextLine();
-        if(str.equalsIgnoreCase("q")) {
-          break;
-        }
-      }
-    }
-  }
-
 
 
 

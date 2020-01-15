@@ -1,17 +1,18 @@
 package sinyj0622.mytrip.handler;
 
 import sinyj0622.mytrip.domain.Plan;
-import sinyj0622.mytrip.util.AbstractList;
+import sinyj0622.mytrip.util.Iterator;
+import sinyj0622.mytrip.util.List;
 import sinyj0622.mytrip.util.Prompt;
 
 public class PlanHandler {
 
-	AbstractList<Plan> planList;
+	List<Plan> planList;
 
 	Prompt prompt;
 
 
-	public PlanHandler(Prompt prompt, AbstractList<Plan> list) {
+	public PlanHandler(Prompt prompt, List<Plan> list) {
 		this.prompt = prompt;
 		this.planList = list;
 	}
@@ -35,9 +36,10 @@ public class PlanHandler {
 	}
 
 	public void listTravelPlan() {
-		Plan[] arr = new Plan[this.planList.size()];
-		this.planList.toArray(arr);
-		for(Plan p : arr) {
+
+	      Iterator<Plan> iterator = planList.iterator();
+	      while (iterator.hasNext()) {
+	        Plan p = iterator.next();
 			System.out.printf("%d, %s, %s, %s ~ %s\n", 
 					p.getNo(), p.getTravelTitle(), p.getDestnation(), 
 					p.getStartDate(), p.getEndDate());

@@ -2,18 +2,18 @@ package sinyj0622.mytrip.handler;
 
 import java.sql.Date;
 import sinyj0622.mytrip.domain.Member;
-import sinyj0622.mytrip.util.AbstractList;
+import sinyj0622.mytrip.util.List;
 import sinyj0622.mytrip.util.Prompt;
 
 public class MemberHandler {
 
   
-  AbstractList<Member> memberList;
+  List<Member> memberList;
 
   Prompt prompt;
 
 
-  public MemberHandler(Prompt prompt, AbstractList<Member> list) {
+  public MemberHandler(Prompt prompt, List<Member> list) {
     this.prompt = prompt;
     this.memberList = list;  
   }
@@ -36,11 +36,9 @@ public class MemberHandler {
   }
 
   public void listMember() {
-    
-    Member[] arr = new Member[this.memberList.size()];
-    
-    this.memberList.toArray(arr);
-    for (Member m : arr) {
+
+      for (int i = 0; i < memberList.size(); i++) {
+        Member m = memberList.get(i);
       System.out.printf("%d, %s, %s, %s, %s\n", 
           m.getNo(), m.getName(), m.getEmail(), m.getPhonenumber(), m.getRegisteredDate());
     }

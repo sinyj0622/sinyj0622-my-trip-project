@@ -2,18 +2,19 @@ package sinyj0622.mytrip.handler;
 
 import java.sql.Date;
 import sinyj0622.mytrip.domain.Board;
-import sinyj0622.mytrip.util.AbstractList;
+import sinyj0622.mytrip.util.Iterator;
+import sinyj0622.mytrip.util.List;
 import sinyj0622.mytrip.util.Prompt;
 
 public class BoardHandler {
 
 
-  AbstractList<Board> boardList;
+  List<Board> boardList;
 
   Prompt prompt;
 
 
-  public BoardHandler(Prompt prompt, AbstractList<Board> list) {
+  public BoardHandler(Prompt prompt, List<Board> list) {
     this.prompt = prompt;
     this.boardList = list;
   }
@@ -36,11 +37,9 @@ public class BoardHandler {
 
   public void listBoard() {
     
-    Board[] arr = new Board[this.boardList.size()];
-    
-    this.boardList.toArray(arr);
-    
-    for (Board b : arr) {
+    Iterator<Board> iterator = boardList.iterator();
+        while(iterator.hasNext()) {
+        Board b = iterator.next();
       System.out.printf("%d, %s, %s, %d\n", 
           b.getNo(), b.getText(), b.getDate(), b.getViewCount());
     }
