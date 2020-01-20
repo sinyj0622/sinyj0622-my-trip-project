@@ -1,5 +1,11 @@
 package sinyj0622.mytrip;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import sinyj0622.mytrip.domain.Board;
 import sinyj0622.mytrip.domain.Member;
@@ -7,18 +13,13 @@ import sinyj0622.mytrip.domain.Plan;
 import sinyj0622.mytrip.handler.BoardHandler;
 import sinyj0622.mytrip.handler.MemberHandler;
 import sinyj0622.mytrip.handler.PlanHandler;
-import sinyj0622.mytrip.util.ArrayList;
-import sinyj0622.mytrip.util.Iterator;
-import sinyj0622.mytrip.util.LinkedList;
 import sinyj0622.mytrip.util.Prompt;
-import sinyj0622.mytrip.util.Queue;
-import sinyj0622.mytrip.util.Stack;
 
-public class App{
+public class App {
 
   static Scanner keyboard = new Scanner(System.in);
-  static Stack<String> commandStack = new Stack<>();
-  static Queue<String> commandQueue = new Queue<>();
+  static Deque<String> commandStack = new ArrayDeque<>();
+  static Queue<String> commandQueue = new LinkedList<>();
 
   public static void main(String[] args) {
 
@@ -59,24 +60,24 @@ public class App{
         case "/plan/delete":
           planEdit1.deletePlan();
           break;
-        case "/member/add":  
+        case "/member/add":
           memberEdit1.addMember();
           break;
-        case "/member/list":  
+        case "/member/list":
           memberEdit1.listMember();
-          break;     
-        case "/member/detail":  
+          break;
+        case "/member/detail":
           memberEdit1.detailMember();
-          break;             
-        case "/member/update":  
+          break;
+        case "/member/update":
           memberEdit1.updateMember();
-          break;    
-        case "/member/delete":  
+          break;
+        case "/member/delete":
           memberEdit1.deleteMember();
           break;
         case "/board/add":
           boardedit1.addBoard();
-          break;          
+          break;
         case "/board/list":
           boardedit1.listBoard();
           break;
@@ -108,7 +109,7 @@ public class App{
 
   public static void printCommandHistory(Iterator<String> iterator) {
     int count = 0;
-    while(iterator.hasNext()) {
+    while (iterator.hasNext()) {
       System.out.println(iterator.next());
       count++;
 
