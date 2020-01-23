@@ -10,7 +10,12 @@ import java.util.Scanner;
 import sinyj0622.mytrip.domain.Board;
 import sinyj0622.mytrip.domain.Member;
 import sinyj0622.mytrip.domain.Plan;
-import sinyj0622.mytrip.handler.BoardHandler;
+import sinyj0622.mytrip.handler.BoardAddCommand;
+import sinyj0622.mytrip.handler.BoardDeleteCommand;
+import sinyj0622.mytrip.handler.BoardDetailCommand;
+import sinyj0622.mytrip.handler.BoardListCommand;
+import sinyj0622.mytrip.handler.BoardUpdateCommand;
+import sinyj0622.mytrip.handler.Command;
 import sinyj0622.mytrip.handler.MemberHandler;
 import sinyj0622.mytrip.handler.PlanHandler;
 import sinyj0622.mytrip.util.Prompt;
@@ -27,7 +32,11 @@ public class App {
     Prompt prompt = new Prompt(keyboard);
 
     ArrayList<Board> boardList = new ArrayList<>();
-    BoardHandler boardedit1 = new BoardHandler(prompt, boardList);
+    Command boardAddCommand = new BoardAddCommand(prompt, boardList);
+    Command boardListCommand = new BoardListCommand(boardList);
+    Command boardDeleteCommand = new BoardDeleteCommand(prompt, boardList);
+    Command boardDetailCommand = new BoardDetailCommand(prompt, boardList);
+    Command boardUpdateCommand = new BoardUpdateCommand(prompt, boardList);
 
     LinkedList<Member> memberList = new LinkedList<>();
     MemberHandler memberEdit1 = new MemberHandler(prompt, memberList);
