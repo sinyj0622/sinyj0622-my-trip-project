@@ -63,9 +63,7 @@ public class App {
     commandMap.put("/plan/detail",new PlanDetailCommand(prompt, planList));
     commandMap.put("/plan/list",new PlanListCommand(planList));
     commandMap.put("/plan/update",new PlanUpdateCommand(prompt, planList));
-
-
-    HelloCommand helloCommand = new HelloCommand(prompt);
+    
     commandMap.put("/hello",new HelloCommand(prompt)); 
     
     String command;
@@ -98,8 +96,8 @@ public class App {
      if (commandHandler != null) {
     	 try {
     	 commandHandler.execute();
-    	 } catch(Exception e) {
-         System.out.printf("명령어 실행 중 오류 발생: %s\n", e.getMessage());
+    	 } catch (Exception e) {
+    	 System.out.printf("명령어 실행 중 오류 발생: %s\n", e.getMessage());
     	 }
      } else {
     	 System.out.println("실행할 수 없는 명령입니다.");
