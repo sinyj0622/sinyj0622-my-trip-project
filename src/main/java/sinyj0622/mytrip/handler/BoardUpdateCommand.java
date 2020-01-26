@@ -32,19 +32,21 @@ public class BoardUpdateCommand implements Command {
     }
 
     Board oldBoard = this.boardList.get(index);
-    String text = prompt.inputString("내용(%s)?", oldBoard.getText());
-
-    if (text.length() == 0) {
-      System.out.println("게시글 변경을 취소했습니다.");
-      return;
-    }
-
     Board newBoard = new Board();
-    newBoard.setViewCount(oldBoard.getViewCount());
-    newBoard.setNo(oldBoard.getNo());
-    newBoard.setText(text);
-    newBoard.setDate(new Date(System.currentTimeMillis()));
+ 
 
+    newBoard.setNo(oldBoard.getNo());
+    newBoard.setViewCount(oldBoard.getViewCount());
+    newBoard.setDate(new Date(System.currentTimeMillis()));
+    newBoard.setText(
+    		prompt.inputString(String.format("내용(%s)? ", oldBoard.getText())));
+
+    
+    if (newBoard.equals(oldBoard)) {
+    	System.out.println("게시글 변경을 취소했습니다.");
+    	return;
+    }
+    
     this.boardList.set(index, newBoard);
 
     System.out.println("게시글을 변경했습니다.");
