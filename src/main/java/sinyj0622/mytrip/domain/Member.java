@@ -12,6 +12,27 @@ public class Member {
 	private String phonenumber;
 	private Date registeredDate;    
 	
+	public static Member valueOf(String csv) {
+		String[] data = csv.split(",");
+
+		Member member = new Member();
+		member.setNo(Integer.parseInt(data[0]));
+		member.setName(data[1]);
+		member.setNickname(data[2]);
+		member.setEmail(data[3]);
+		member.setPassWord(data[4]);
+		member.setMyphoto(data[5]);
+		member.setPhonenumber(data[6]);
+		member.setRegisteredDate(Date.valueOf(data[7]));
+		
+		return member;
+	}
+	
+	public String toCsvString() {
+		return String.format("%d,%s,%s,%s,%s,%s,%s,%s", this.getNo(), this.getName(),
+				this.getNickname(), this.getEmail(), this.getPassWord(), this.getMyphoto(),
+				this.getPhonenumber(), this.getRegisteredDate());
+	}
 	
 	public int getNo() {
 		return no;

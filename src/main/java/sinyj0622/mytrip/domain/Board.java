@@ -8,6 +8,22 @@ public class Board {
 	private Date date;
 	private int viewCount;
 
+	public static Board valueOf(String csv) {
+		String[] data = csv.split(",");
+
+		Board board = new Board();
+		board.setNo(Integer.parseInt(data[0]));
+		board.setText(data[1]);
+		board.setDate(Date.valueOf(data[2]));
+		board.setViewCount(Integer.parseInt(data[3]));
+
+		return board;
+	}
+	
+	public String toCsvString() {
+		 return String.format("%d,%s,%s,%d", this.getNo(), this.getText(), 
+				 this.getDate(), this.getViewCount());
+	}
 
 	public int getNo() {
 		return no;

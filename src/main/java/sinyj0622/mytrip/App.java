@@ -153,17 +153,8 @@ public class App {
 
 			while (true) {
 				try {
-
-					String line = dataScan.nextLine();
-					String[] data = line.split(",");
-
-					Board board = new Board();
-					board.setNo(Integer.parseInt(data[0]));
-					board.setText(data[1]);
-					board.setDate(Date.valueOf(data[2]));
-					board.setViewCount(Integer.parseInt(data[3]));
-
-					boardList.add(board);
+					
+					boardList.add(Board.valueOf(dataScan.nextLine()));
 					count++;
 
 				} catch (Exception e) {
@@ -201,10 +192,8 @@ public class App {
 			int count = 0;
 
 			for (Board board : boardList) {
-				String line = String.format("%d,%s,%s,%d\n", board.getNo(), board.getText(), 
-						board.getDate(), board.getViewCount());
-
-				out.write(line);
+				
+				out.write(board.toCsvString() + "\n");
 				count++;
 			}
 
@@ -233,20 +222,8 @@ public class App {
 			int count = 0;
 			while(true) {
 				try{
-					String line = dataScan.nextLine();
-					String[] data = line.split(",");
-
-					Member member = new Member();
-					member.setNo(Integer.parseInt(data[0]));
-					member.setName(data[1]);
-					member.setNickname(data[2]);
-					member.setEmail(data[3]);
-					member.setPassWord(data[4]);
-					member.setMyphoto(data[5]);
-					member.setPhonenumber(data[6]);
-					member.setRegisteredDate(Date.valueOf(data[7]));
-
-					memberList.add(member);
+					
+					memberList.add(Member.valueOf(dataScan.nextLine()));
 					count++;
 				} catch(Exception e) {
 					break;
@@ -280,11 +257,8 @@ public class App {
 			int count = 0;
 
 			for (Member member : memberList) {
-				String line = String.format("%d,%s,%s,%s,%s,%s,%s,%s\n", member.getNo(), member.getName(),
-						member.getNickname(), member.getEmail(),member.getPassWord(), member.getMyphoto(),
-						member.getPhonenumber(), member.getRegisteredDate());
-
-				out.write(line);
+				
+				out.write(member.toCsvString() + "\n");
 				count++;
 			}
 
@@ -315,20 +289,8 @@ public class App {
 
 			while (true) {
 				try {
-
-					String line = dataScan.nextLine();
-					String[] data = line.split(",");
-
-					Plan plan = new Plan();
-					plan.setNo(Integer.parseInt(data[0]));
-					plan.setDestnation(data[1]);
-					plan.setTravelTitle(data[2]);
-					plan.setPerson(data[3]);
-					plan.setStartDate(data[4]);
-					plan.setEndDate(data[5]);
-					plan.setTravelMoney(data[6]);
-
-					planList.add(plan);
+					
+					planList.add(Plan.valueOf(dataScan.nextLine()));
 					count++;
 
 				} catch (Exception e) {
@@ -365,10 +327,8 @@ public class App {
 			int count = 0;
 
 			for (Plan plan : planList) {
-				String line = String.format("%d,%s,%s,%s,%s,%s,%s\n", plan.getNo(),plan.getDestnation(),
-						plan.getTravelTitle(), plan.getPerson(), plan.getStartDate(), plan.getEndDate(),
-						plan.getTravelMoney());
-				out.write(line);
+				
+				out.write(plan.toCsvString() + "\n");
 				count++;
 			}
 

@@ -9,6 +9,28 @@ public class Plan {
 	private String endDate;
 	private String travelMoney;
 	
+	
+	public static Plan valueOf(String csv) {
+		String[] data = csv.split(",");
+
+		Plan plan = new Plan();
+		plan.setNo(Integer.parseInt(data[0]));
+		plan.setDestnation(data[1]);
+		plan.setTravelTitle(data[2]);
+		plan.setPerson(data[3]);
+		plan.setStartDate(data[4]);
+		plan.setEndDate(data[5]);
+		plan.setTravelMoney(data[6]);
+		
+		return plan;
+	}
+	
+	public String toCsvString() {
+		 return String.format("%d,%s,%s,%s,%s,%s,%s", this.getNo(),this.getDestnation(),
+				 this.getTravelTitle(), this.getPerson(), this.getStartDate(), this.getEndDate(),
+				 this.getTravelMoney());
+	}
+	
   public int getNo() {
     return no;
   }
