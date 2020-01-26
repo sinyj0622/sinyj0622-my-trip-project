@@ -8,6 +8,7 @@ public class Plan {
 	private String startDate;
 	private String endDate;
 	private String travelMoney;
+	
   public int getNo() {
     return no;
   }
