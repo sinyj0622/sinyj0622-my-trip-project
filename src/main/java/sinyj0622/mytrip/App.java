@@ -1,11 +1,14 @@
 package sinyj0622.mytrip;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -144,12 +147,17 @@ public class App {
 
 
 	public static void loadBoardData() {
-		File file = new File("./board.json");
+		File file = new File("./board.data");
 
-		try(BufferedReader in = new BufferedReader(new FileReader(file))) {
+		try(DataInputStream in = new DataInputStream(new FileInputStream(file))) {
 
-			Board[] boards = new Gson().fromJson(in, Board[].class);
-			for (Board board : boards) {
+			int size = in.readInt();
+			for (int i = 0; i < size; i++) {
+				Board board = new Board();
+				board.setNo(in.readInt());
+				board.setText(in.readUTF());
+				board.setDate(Date.valueOf(in.readUTF()));
+				board.setViewCount(in.readInt());
 				boardList.add(board);
 			}
 			
@@ -163,11 +171,17 @@ public class App {
 
 
 		public static void saveBoardData() {
-			File file = new File("./board.json");
+			File file = new File("./board.data");
 
-			try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+			try (DataOutputStream out = new DataOutputStream(new FileOutputStream(file))) {
 				
-				out.write( new Gson().toJson(boardList));
+				out.writeInt(boardList.size());
+				for (Board board : boardList) {
+					out.writeInt(board.getNo());
+					out.writeUTF(board.getText());
+					out.writeUTF(board.getDate().toString());
+					out.writeInt(board.getViewCount());
+				}
 					
 				System.out.printf("총 %d개의 게시글을 저장하였습니다.\n", boardList.size());
 
@@ -178,12 +192,21 @@ public class App {
 		}
 
 		public static void loadMemberData() {
-			File file = new File("./member.json");
+			File file = new File("./member.data");
 
-			try(BufferedReader in = new BufferedReader(new FileReader(file))) {
+			try(DataInputStream in = new DataInputStream(new FileInputStream(file))) {
 
-				Member[] members = new Gson().fromJson(in, Member[].class);
-				for (Member member : members) {
+				int size = in.readInt();
+				for (int i = 0; i < size; i++) {
+					Member member = new Member();
+					member.setNo(in.readInt());
+					member.setName(in.readUTF());
+					member.setNickname(in.readUTF());
+					member.setEmail(in.readUTF());
+					member.setPassWord(in.readUTF());
+					member.setMyphoto(in.readUTF());
+					member.setPhonenumber(in.readUTF());
+					member.setRegisteredDate(Date.valueOf(in.readUTF()));
 					memberList.add(member);
 				}
 				
@@ -196,12 +219,21 @@ public class App {
 		}
 
 		public static void saveMemberData() {
-			File file = new File("./member.json");
+			File file = new File("./member.data");
 
-			try (BufferedWriter out = new BufferedWriter(new FileWriter(file))){
+			try (DataOutputStream out = new DataOutputStream(new FileOutputStream(file))){
 				
-				out.write(new Gson().toJson(memberList));
-				
+				out.writeInt(memberList.size());
+				for (Member member : memberList) {
+					out.writeInt(member.getNo());
+					out.writeUTF(member.getName());
+					out.writeUTF(member.getNickname());
+					out.writeUTF(member.getEmail());
+					out.writeUTF(member.getPassWord());
+					out.writeUTF(member.getMyphoto());
+					out.writeUTF(member.getPhonenumber());
+					out.writeUTF(member.getRegisteredDate().toString());
+				}
 				System.out.printf("총 %d개의 회원 데이터를 저장하였습니다.\n", memberList.size() );
 
 
@@ -211,11 +243,22 @@ public class App {
 		}
 
 		public static void loadPlanData() {
-			File file = new File("./plan.json");
+			File file = new File("./plan.data");
 
-			try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+			try (DataInputStream in = new DataInputStream(new FileInputStream(file))) {
 				
-				planList.addAll(Arrays.asList(new Gson().fromJson(in, Plan[].class)));
+				int size = in.readInt();
+				for (int i = 0; i < size; i++) {
+					Plan plan = new Plan();
+					plan.setNo(in.readInt());
+					plan.setDestnation(in.readUTF());
+					plan.setTravelTitle(in.readUTF());
+					plan.setPerson(in.readUTF());
+					plan.setStartDate(in.readUTF());
+					plan.setEndDate(in.readUTF());
+					plan.setTravelMoney(in.readUTF());
+					planList.add(plan);
+				}
 				
 				System.out.printf("총 %d개의 여행계획 데이터를 로딩했습니다.\n", planList.size());
 
@@ -227,11 +270,21 @@ public class App {
 		}
 
 		public static void savePlanData() {
-			File file = new File("./plan.json");
+			File file = new File("./plan.data");
 
-			try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+			try (DataOutputStream out = new DataOutputStream(new FileOutputStream(file))) {
 
-				out.write(new Gson().toJson(planList));
+				out.writeInt(planList.size());
+				for (Plan plan : planList) {
+				out.writeInt(plan.getNo());
+				out.writeUTF(plan.getDestnation());
+				out.writeUTF(plan.getTravelTitle());
+				out.writeUTF(plan.getPerson());
+				out.writeUTF(plan.getStartDate());
+				out.writeUTF(plan.getEndDate());
+				out.writeUTF(plan.getTravelMoney());
+				}
+				
 				System.out.printf("총 %d개의 여행계획 데이터를 저장하였습니다.\n", planList.size());
 
 
