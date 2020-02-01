@@ -1,25 +1,21 @@
 package sinyj0622.mytrip;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Date;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
-
-import com.google.gson.Gson;
 
 import sinyj0622.mytrip.domain.Board;
 import sinyj0622.mytrip.domain.Member;
@@ -48,9 +44,9 @@ public class App {
 	static Scanner keyboard = new Scanner(System.in);
 	static Deque<String> commandStack = new ArrayDeque<>();
 	static Queue<String> commandQueue = new LinkedList<>();
-	static ArrayList<Board> boardList = new ArrayList<>();
-	static LinkedList<Member> memberList = new LinkedList<>();
-	static ArrayList<Plan> planList = new ArrayList<>();
+	static List<Board> boardList = new ArrayList<>();
+	static List<Member> memberList = new LinkedList<>();
+	static List<Plan> planList = new ArrayList<>();
 
 	public static void main(String[] args) {
 
@@ -147,23 +143,15 @@ public class App {
 
 
 	public static void loadBoardData() {
-		File file = new File("./board.data");
 
-		try(DataInputStream in = new DataInputStream(new FileInputStream(file))) {
+		try(ObjectInputStream in = new ObjectInputStream(
+				new BufferedInputStream(new FileInputStream("./board.ser2")))) {
 
-			int size = in.readInt();
-			for (int i = 0; i < size; i++) {
-				Board board = new Board();
-				board.setNo(in.readInt());
-				board.setText(in.readUTF());
-				board.setDate(Date.valueOf(in.readUTF()));
-				board.setViewCount(in.readInt());
-				boardList.add(board);
-			}
+			boardList =  (List<Board>) in.readObject();
 			
 			System.out.printf("총 %d개의 게시글 데이터를 로딩했습니다.\n", boardList.size());
 			
-			} catch (IOException e) {
+			} catch (Exception e) {
 				System.out.println("파일 읽기 중 오류 발생! - " + e.getMessage());
 			}  
 
@@ -171,17 +159,12 @@ public class App {
 
 
 		public static void saveBoardData() {
-			File file = new File("./board.data");
-
-			try (DataOutputStream out = new DataOutputStream(new FileOutputStream(file))) {
+			
+			try (ObjectOutputStream out = new ObjectOutputStream(
+					new BufferedOutputStream(new FileOutputStream("./board.ser2")))) {
 				
-				out.writeInt(boardList.size());
-				for (Board board : boardList) {
-					out.writeInt(board.getNo());
-					out.writeUTF(board.getText());
-					out.writeUTF(board.getDate().toString());
-					out.writeInt(board.getViewCount());
-				}
+				out.writeObject(boardList);
+			
 					
 				System.out.printf("총 %d개의 게시글을 저장하였습니다.\n", boardList.size());
 
@@ -192,48 +175,27 @@ public class App {
 		}
 
 		public static void loadMemberData() {
-			File file = new File("./member.data");
 
-			try(DataInputStream in = new DataInputStream(new FileInputStream(file))) {
+			try(ObjectInputStream in = new ObjectInputStream(
+					new BufferedInputStream(new FileInputStream("./member.ser2")))) {
 
-				int size = in.readInt();
-				for (int i = 0; i < size; i++) {
-					Member member = new Member();
-					member.setNo(in.readInt());
-					member.setName(in.readUTF());
-					member.setNickname(in.readUTF());
-					member.setEmail(in.readUTF());
-					member.setPassWord(in.readUTF());
-					member.setMyphoto(in.readUTF());
-					member.setPhonenumber(in.readUTF());
-					member.setRegisteredDate(Date.valueOf(in.readUTF()));
-					memberList.add(member);
-				}
+				memberList = (List<Member>) in.readObject();
 				
 				System.out.printf("총 %d개의 회원 데이터를 로딩했습니다.\n", memberList.size() );
 				
-			} catch (IOException e) {
+			} catch (Exception e) {
 				System.out.println("파일 읽기 중 오류 발생! - " + e.getMessage());
 			} 
 			
 		}
 
 		public static void saveMemberData() {
-			File file = new File("./member.data");
 
-			try (DataOutputStream out = new DataOutputStream(new FileOutputStream(file))){
+			try (ObjectOutputStream out = new ObjectOutputStream(
+					new BufferedOutputStream(new FileOutputStream("./member.ser2")))){
 				
-				out.writeInt(memberList.size());
-				for (Member member : memberList) {
-					out.writeInt(member.getNo());
-					out.writeUTF(member.getName());
-					out.writeUTF(member.getNickname());
-					out.writeUTF(member.getEmail());
-					out.writeUTF(member.getPassWord());
-					out.writeUTF(member.getMyphoto());
-					out.writeUTF(member.getPhonenumber());
-					out.writeUTF(member.getRegisteredDate().toString());
-				}
+				out.writeObject(memberList);
+				
 				System.out.printf("총 %d개의 회원 데이터를 저장하였습니다.\n", memberList.size() );
 
 
@@ -243,47 +205,27 @@ public class App {
 		}
 
 		public static void loadPlanData() {
-			File file = new File("./plan.data");
 
-			try (DataInputStream in = new DataInputStream(new FileInputStream(file))) {
+			try (ObjectInputStream in = new ObjectInputStream(
+					new BufferedInputStream(new FileInputStream("./plan.ser2")))) {
 				
-				int size = in.readInt();
-				for (int i = 0; i < size; i++) {
-					Plan plan = new Plan();
-					plan.setNo(in.readInt());
-					plan.setDestnation(in.readUTF());
-					plan.setTravelTitle(in.readUTF());
-					plan.setPerson(in.readUTF());
-					plan.setStartDate(in.readUTF());
-					plan.setEndDate(in.readUTF());
-					plan.setTravelMoney(in.readUTF());
-					planList.add(plan);
-				}
+				planList = (List<Plan>) in.readObject();
 				
 				System.out.printf("총 %d개의 여행계획 데이터를 로딩했습니다.\n", planList.size());
 
 
-			} catch (IOException e) {
+			} catch (Exception e) {
 				System.out.println("파일 읽기 중 오류 발생! - " + e.getMessage());
 			}  
 
 		}
 
 		public static void savePlanData() {
-			File file = new File("./plan.data");
 
-			try (DataOutputStream out = new DataOutputStream(new FileOutputStream(file))) {
+			try (ObjectOutputStream out = new ObjectOutputStream(
+					new BufferedOutputStream(new FileOutputStream("./plan.ser2")))) {
 
-				out.writeInt(planList.size());
-				for (Plan plan : planList) {
-				out.writeInt(plan.getNo());
-				out.writeUTF(plan.getDestnation());
-				out.writeUTF(plan.getTravelTitle());
-				out.writeUTF(plan.getPerson());
-				out.writeUTF(plan.getStartDate());
-				out.writeUTF(plan.getEndDate());
-				out.writeUTF(plan.getTravelMoney());
-				}
+				out.writeObject(planList);
 				
 				System.out.printf("총 %d개의 여행계획 데이터를 저장하였습니다.\n", planList.size());
 

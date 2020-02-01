@@ -1,6 +1,11 @@
 package sinyj0622.mytrip.domain;
 
-public class Plan {
+import java.io.Serializable;
+
+public class Plan implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	private int no;
 	private String Destnation;
 	private String travelTitle;
