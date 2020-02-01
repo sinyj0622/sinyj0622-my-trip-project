@@ -1,7 +1,8 @@
 package sinyj0622.mytrip;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,7 +13,6 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -146,7 +146,7 @@ public class App {
 	public static void loadBoardData() {
 		File file = new File("./board.json");
 
-		try(FileReader in = new FileReader(file)) {
+		try(BufferedReader in = new BufferedReader(new FileReader(file))) {
 
 			Board[] boards = new Gson().fromJson(in, Board[].class);
 			for (Board board : boards) {
@@ -165,7 +165,7 @@ public class App {
 		public static void saveBoardData() {
 			File file = new File("./board.json");
 
-			try (FileWriter out = new FileWriter(file)) {
+			try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
 				
 				out.write( new Gson().toJson(boardList));
 					
@@ -180,7 +180,7 @@ public class App {
 		public static void loadMemberData() {
 			File file = new File("./member.json");
 
-			try(FileReader in = new FileReader(file); ) {
+			try(BufferedReader in = new BufferedReader(new FileReader(file))) {
 
 				Member[] members = new Gson().fromJson(in, Member[].class);
 				for (Member member : members) {
@@ -197,10 +197,8 @@ public class App {
 
 		public static void saveMemberData() {
 			File file = new File("./member.json");
-			FileWriter out = null;
 
-			try {
-				out = new FileWriter(file);
+			try (BufferedWriter out = new BufferedWriter(new FileWriter(file))){
 				
 				out.write(new Gson().toJson(memberList));
 				
@@ -209,19 +207,13 @@ public class App {
 
 			} catch (IOException e) {
 				System.out.println("파일 저장 중 오류 발생! - " + e.getMessage());
-			} finally {
-				try {
-					out.close();
-				} catch (IOException e) {
-
-				}
-			}
+			} 
 		}
 
 		public static void loadPlanData() {
 			File file = new File("./plan.json");
 
-			try (FileReader in = new FileReader(file)) {
+			try (BufferedReader in = new BufferedReader(new FileReader(file))) {
 				
 				planList.addAll(Arrays.asList(new Gson().fromJson(in, Plan[].class)));
 				
@@ -237,7 +229,7 @@ public class App {
 		public static void savePlanData() {
 			File file = new File("./plan.json");
 
-			try (FileWriter out = new FileWriter(file)) {
+			try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
 
 				out.write(new Gson().toJson(planList));
 				System.out.printf("총 %d개의 여행계획 데이터를 저장하였습니다.\n", planList.size());
